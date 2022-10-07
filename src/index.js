@@ -4,10 +4,37 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('order-tracking'));
+
+let orderData = {};
+
+const getData = (name) => {
+  try {
+    return document.getElementsByName(name)[0].innerText
+  } catch (error) {
+    return ''
+  }
+}
+
+const shippingAddress = () => {
+  try {
+    return JSON.parse(document.getElementsByName('addresses')[0].children.shippingAddress.innerText)
+  } catch (error) {
+    return ''
+  }
+}
+
+orderData = {...orderData, 
+  orderId : getData('orderId'), 
+  financialStatus: getData('financialStatus'),
+  shippingAddress: shippingAddress(),
+}
+
+
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App orderData={orderData}/>
   </React.StrictMode>
 );
 

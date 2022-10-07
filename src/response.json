@@ -1,0 +1,62 @@
+{
+    "status": {
+        "statusCode": 6000,
+        "statusMessage": "All Good folks!!!"
+    },
+    "data": {
+        "id": 12342021,
+        "channelOrderId": "4905384280154",
+        "channelParentOrderId": "4905384280154",
+        "channelId": 21,
+        "facilityId": 67,
+        "brandId": 17,
+        "businessModelId": 1,
+        "orderStatus": 1,
+        "totalQty": 1,
+        "dispatchedQty": 1,
+        "cancelledQty": 0,
+        "sellerCancelled": 0,
+        "customerCancelled": 0,
+        "totalAmount": 2433.0,
+        "totalGift": 0.0,
+        "totalShipping": 0.0,
+        "totalDiscount": 0.0,
+        "prepaidAmount": 0.0,
+        "totalTax": 0.0,
+        "cgst": 0.0,
+        "sgst": 0.0,
+        "igst": 0.0,
+        "orderDate": "2022-08-01 06:14:00.000",
+        "confirmDate": "2022-08-01 06:14:00.000",
+        "packedDate": "2022-08-01 06:14:00.000",
+        "couponCode": "",
+        "customerEmail": "test@mensa.com",
+        "customerPhone": "9876543211",
+        "localCurrencyIsoCode": "INR",
+        "localTimezoneIsoCode": "IST",
+        "orderStatusString": "PENDING_VERIFICATION",
+        "businessModelName": "b2c",
+        "orderSkus": null,
+        "brand": {
+            "id": 17,
+            "brandName": "karagiri",
+            "phoneNumber": null,
+            "alternatePhoneNumber": null,
+            "emailId": null,
+            "gstNumber": "NA"
+        },
+        "channel": {
+            "id": 21,
+            "channelId": "shopify",
+            "channelName": "shopify",
+            "parentChannelName": "D2C"
+        },
+        "facility": {
+            "id": 67,
+            "facilityCode": "vishnu weaves",
+            "facilityName": "vishnu weaves",
+            "postalCode": "",
+            "countryCode": ""
+        }
+    }
+}

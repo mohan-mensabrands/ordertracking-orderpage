@@ -1,38 +1,341 @@
-.App {
-  text-align: center;
+#root {
+    font-family: 'Overpass';
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.saparator {
+    margin: 0;
+    height: 8px;
+    width: 100%;
+    background-color: #F8F8F8;
+    border: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* product card */
+
+.orderTrackingCard {
+    display: flex;
+    padding: 10px 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* fonts */
+
+.orderTracking-heading {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 125%;
 }
 
-.App-link {
-  color: #61dafb;
+.orderTracking-para {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.orderTracking-para-bold {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.orderTracking-bold {
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.orderTracking-xbold {
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 200%;
+}
+
+
+/* orderId and back */
+
+.orderId-back-button {
+    display: flex;
+}
+
+.button-back {
+    border: none;
+    background: transparent;
+    padding: 0 17px 0 0;
+}
+
+.orderId-back-button {
+    padding: 16px 27.5px;
+}
+
+/* orderInfoCard */
+
+.order-info>img {
+    margin-right: 20px;
+}
+
+.product-image {
+    box-sizing: border-box;
+    width: 90px;
+    height: 120px;
+    border: 1px solid #F8F8F8;
+    border-radius: 10px;
+}
+
+.product-info {
+    padding-top: 8px;
+}
+
+.product-name {
+    text-transform: lowercase;
+    color: #767676;
+}
+
+.product-size {
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #767676;
+}
+
+.product-size>.spacer {
+    width: 40px;
+    display: inline-block;
+}
+
+.price {
+    margin-top: 24px;
+    display: flex;
+    gap: 8px;
+}
+
+.price>.final-price {
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 18px;
+    mix-blend-mode: normal;
+    opacity: 0.9;
+}
+
+.price>.full-price {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    text-decoration-line: line-through;
+    color: #9B9B9B;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+}
+
+.price>.discount-percent {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #EF4044;
+    opacity: 0.8;
+}
+
+.price>.discount-percent::after{
+    content: ")";
+}
+.price>.discount-percent::before{
+    content: "(";
+}
+
+/* time line */
+
+.timeline{
+    flex-direction: column;
+}
+
+.timeline-event {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF;
+    border-top: 1px solid #D9D9D9;
+    border-left: 1px solid #D9D9D9;
+    border-right: 1px solid #D9D9D9;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-event:last-child {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.timeline>.not,
+.timeline>.completed {
+    color: #767676;
+}
+
+.timeline>.in-progress {
+    background: #02B875;
+    border: 1px solid #02B875;
+    color: #FFFFFF;
+}
+
+.dot-line {
+    height: 100%;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-line>.dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+}
+
+.timeline>.in-progress .dot {
+    background: #ffffff;
+}
+
+.timeline>.not .dot {
+    background: #D9D9D9;
+}
+
+.timeline>.completed .dot {
+    background: #02B875;
+}
+
+.timeline .line {
+    position: relative;
+    right: 5px;
+    height: 50px;
+    width: 2px;
+}
+
+.timeline>.completed .line {
+    background-color: #02B875;
+}
+
+.timeline>.in-progress .line {
+    background-color: #ffffff;
+}
+
+.timeline>.not .line {
+    background-color: #D9D9D9;
+}
+
+.timeline-event:last-child .line {
+    height: 25px;
+    position: relative;
+    top: -12.5px
+}
+
+.timeline-event:first-child .line {
+    height: 25px;
+    position: relative;
+    top: 12.5px;
+}
+
+/* cancel order */
+
+.cancel-order {
+    padding: 0 20px;
+    height: 50px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cancel-order>button {
+    border: none;
+    background: #FFFFFF;
+}
+
+/* order summary */
+
+.order-summary {
+    display: flex;
+    /* padding: 20px; */
+    gap: 20px;
+}
+
+.order-summary-titles,
+.order-summary-values {
+    font-family: 'Overpass';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 200%;
+    color: #222222;
+}
+
+.order-summary-values {
+    font-weight: 700;
+    padding-left: 60px;
+}
+
+/* address */
+
+.addresses {
+    padding-left: 20px;
+    padding-bottom: 12px;
+    padding-right: 20px;
+}
+
+.shippingAddress,
+.billingAddress {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 12px 0;
+}
+
+.shippingAddress-value,
+.billingAddress-value {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.billingAddress::after {
+    content: ">";
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+
+.shippingAddress-phone,
+.billingAddress-phone {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+/* Payment card */
+.paymentMode {
+    display: flex;
+    flex-direction: column;
+}
+
+/* order summary */
+
+.orderDetailsContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orderSummary {
+    width: 100%;
+}
+
+.orderDetailsContainer>.titles>.title {
+    margin-top: 20px;
+}
+.orderDetailsContainer>.values>.value {
+    margin-top: 20px;
 }
