@@ -1,5 +1,7 @@
-#root {
+#order-tracking {
     font-family: 'Overpass';
+    background: white;
+    color: black;
 }
 
 .saparator {
@@ -8,6 +10,25 @@
     width: 100%;
     background-color: #F8F8F8;
     border: none;
+}
+
+.saparator-1px{
+    height: 1px;
+    background-color: #F8F8F8;
+    border: none;
+    margin: 0px;
+}
+
+.orderTracking-svg svg {
+  width : 20px;
+}
+
+/*loader*/
+
+.orderTracking-loader {
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 
 /* product card */
@@ -63,6 +84,8 @@
     border: none;
     background: transparent;
     padding: 0 17px 0 0;
+    display: flex;
+    align-items: center;
 }
 
 .orderId-back-button {
@@ -240,6 +263,10 @@
 
 /* cancel order */
 
+.cancel-order-arrow {
+  display: flex
+}
+
 .cancel-order {
     padding: 0 20px;
     height: 50px;
@@ -282,9 +309,15 @@
 /* address */
 
 .addresses {
-    padding-left: 20px;
-    padding-bottom: 12px;
-    padding-right: 20px;
+    flex-direction: column;
+}
+.orderTrackingAddress{
+  min-height:72px;
+  border-bottom: 1px solid #F8F8F8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .shippingAddress,
@@ -293,6 +326,9 @@
     font-size: 16px;
     line-height: 20px;
     margin: 12px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .shippingAddress-value,
@@ -302,18 +338,15 @@
     line-height: 150%;
 }
 
-.billingAddress::after {
-    content: ">";
-    display: inline-block;
-    float: right;
-    margin-right: 20px;
-}
-
 .shippingAddress-phone,
 .billingAddress-phone {
     font-weight: 600;
     font-size: 14px;
     line-height: 150%;
+}
+
+.orderTracking-svg {
+  min-height : 15px  
 }
 
 /* Payment card */
@@ -327,8 +360,11 @@
 .orderDetailsContainer {
     display: flex;
     justify-content: space-between;
+    padding-top: 10px;
 }
-
+.order-summary-title,.order-summary-value {
+  line-height:200%;
+}
 .orderSummary {
     width: 100%;
 }
@@ -339,3 +375,155 @@
 .orderDetailsContainer>.values>.value {
     margin-top: 20px;
 }
+
+.freeShipping {
+  color: green
+}
+
+ @media (max-width: 767px) {
+.timeline>.in-progress {
+background: #02B875 !important;
+    border: 1px solid #02B875 !important;
+    color: #FFFFFF !important;
+}
+}
+
+/* .orderTracker .order-tracker-card{
+  background-color :rgb(247,255,247);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.orderTracker svg{
+  height: 30px;
+  width: 30px
+}
+
+.order-tracker-discription {
+  padding: 10px;
+}
+
+.order-tracker-card-title {
+  margin-bottom: 0;
+}
+
+.orderTracker .order-tracker-card-content {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.order-info-container {
+  border-top: 1px solid #f0f0f0;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+  padding: 10px;
+}
+
+.order-info-container .orderId {
+  width: 100%;
+  padding: 0px 10px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: small;
+  font-weight: 400;
+  color: grey;
+  line-height: 12px;
+}
+
+.order-info-container .order-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-info-container .order-details .product-image img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-attribute {
+  font-size: 12px;
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 10px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  width: 2px;
+  height: 80%;
+  background-color: green;
+  animation: lineanim 2s;
+}
+
+.order-tracker-spinner {
+  display: flex;
+    justify-content: center;
+    color: gray;
+
+}
+
+@keyframes lineanim {
+  0%{ height: 0%; }
+  100%{ height: 80%; background-color: green;}
+}
+
+.timeline-item {
+  min-height: 40px;
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.timeline-item .title-container{
+  display: flex;
+  gap: 15px;
+}
+
+.timeline-item .dot {
+  display: block;
+  position: relative;
+  left: -6px;
+  top: -5px;
+  margin-top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  border: 2px solid green;
+  background-color: green;
+}
+
+.timeline-item .timeline-item-title {
+  position: relative;
+  top: -10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.timeline-item .timeline-item-discription {
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  color: grey;
+} */

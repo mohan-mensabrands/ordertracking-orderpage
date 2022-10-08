@@ -32,8 +32,8 @@ function Address({ address }) {
       </div>
       {showAddress ?
         <div className={address.title + '-value'}>
-          {`${address.value.first_name} ${address.value.last_name}, ${address.value.address1}, ${address.value.address2}, ${address.value.city}, ${address.value.province}, ${address.value.zip}`}
-          <div className={address.title + '-phone'}>Mobile: {address.value.phone}</div>
+          {address.value}
+          <div className={address.title + '-phone'}>Mobile: {address.contact}</div>
         </div> :
         <></>
       }

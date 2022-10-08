@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function OrderIdAndBack({orderId}) {
     return (
@@ -8,7 +9,11 @@ export default function OrderIdAndBack({orderId}) {
                     <path d="M9 16.5L1.5 9L9 1.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>
-            <div><span> Order History</span></div>
+            <div><span> Order {orderId}</span></div>
         </div>
     )
+}
+
+OrderIdAndBack.propTypes = {
+    orderId: PropTypes.string
 }

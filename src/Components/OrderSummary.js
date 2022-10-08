@@ -38,7 +38,7 @@ export default function OrderSummary({ orderSummary }) {
             {
               transformed.map(
                 (item) => item.value === "Free"
-                  ? <div className="order-summary-value freeShipping orderTracking-para">&#8377; {item.value}</div>
+                  ? <div className="order-summary-value freeShipping orderTracking-para"> {item.value}</div>
                   : <div className="order-summary-value orderTracking-para">&#8377; {item.value}</div>
               )
             }
