@@ -78,61 +78,50 @@ const getAddresses = () => {
 
 const getOrderSummary = () => {
   let orderSummary = [];
-
+  // totalMRP disc sub shipping total
+  let raw = { totalMRP: 0, discount: 0, subTotal: 0, shipping: 0,tax:0, total: 0 };
   try {
-    let totalMrp = {
-      title: "Total MRP",
-      value:
-        document.getElementsByName("orderSummary")[0].children.totalMRP
-          .innerText,
-    };
-    orderSummary.push(totalMrp);
+    raw.total =
+      document.getElementsByName("orderSummary")[0].children.total.innerText;
   } catch (error) {
-    console.error("error fetching total MRP");
+    console.error("error fetching total ");
   }
   try {
-    let disc = {
-      title: "Discount",
-      value:
-        document.getElementsByName("orderSummary")[0].children.discount
-          .innerText,
-    };
-    orderSummary.push(disc);
-  } catch (error) {
-    console.error("error fetching discount");
-  }
-  try {
-    let st = {
-      title: "Sub Total",
-      value:
-        document.getElementsByName("orderSummary")[0].children.subTotal
-          .innerText,
-    };
-    orderSummary.push(st);
-  } catch (error) {
-    console.error("error fetching subtotal");
-  }
-  try {
-    let sc = {
-      title: "Shipping Charges",
-      value:
-        document.getElementsByName("orderSummary")[0].children.shippingCharges
-          .innerText,
-    };
-    orderSummary.push(sc);
+    raw.shipping =
+      document.getElementsByName(
+        "orderSummary"
+      )[0].children.shippingCharges.innerText;
   } catch (error) {
     console.error("error fetching shipping charge");
   }
   try {
-    let total = {
-      title: "Total",
-      value:
-        document.getElementsByName("orderSummary")[0].children.total.innerText,
-    };
-    orderSummary.push(total);
+    raw.discount =
+      document.getElementsByName("orderSummary")[0].children.discount.innerText;
   } catch (error) {
-    console.error("error fetching total ");
+    console.error("error fetching discount");
   }
+  try {
+    raw.tax =
+      document.getElementsByName("orderSummary")[0].children.tax.innerText;
+  } catch (error) {
+    console.error("error fetching tax");
+  }
+
+  let mrp = {
+    title: "Total MRP",
+    value:
+      parseFloat(raw.total) -
+      parseFloat(raw.shipping) +
+      parseFloat(raw.discount) -
+      parseFloat(raw.tax)
+      ,
+  };
+  let discount = {title: 'Discount', value: parseFloat(raw.discount)}
+  let subTotal = {title: 'SubTotal', value: mrp.value - discount.value}
+  let shipping = {title: 'Shipping', value: parseFloat(raw.shipping)}
+  let total = {title: 'Total', value: raw.total}
+  let tax = {title: 'Tax', value: raw.tax}
+  orderSummary.push(mrp, discount, subTotal, shipping,tax, total)
   return orderSummary;
 };
 
@@ -213,9 +202,11 @@ const getItems = () => {
 orderData = {
   ...orderData,
   orderId: getData("orderId"),
-  ifCancelled: 'true' === getData("ifCancelled"),
-  ifDelivered: 'fulfilled' === getData('fullfillmentStatus'),
+  ifCancelled: "true" === getData("ifCancelled"),
+  ifDelivered: "fulfilled" === getData("fullfillmentStatus"),
   financialStatus: getData("financialStatus"),
+  orderDate: getData("orderDate"),
+  today: getData("today"),
   addresses: getAddresses(),
   orderSummary: getOrderSummary(),
   lineItems: getItems(),
@@ -223,7 +214,7 @@ orderData = {
 
 root.render(
   // <React.StrictMode>
-    <App orderData={orderData} />
+  <App orderData={orderData} />
   // </React.StrictMode>
 );
 

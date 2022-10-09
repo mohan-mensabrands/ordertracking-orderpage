@@ -4,10 +4,10 @@ export default function OrderSummary({ orderSummary }) {
 
   let transformed = []
   for (let i = 0; i < orderSummary.length; i++) {
-    if (orderSummary[i].title === 'Discount' && orderSummary[i].value == 0) {
+    if (orderSummary[i].title === 'Discount' && orderSummary[i].value === 0.00) {
       continue;
     }
-    if (orderSummary[i].title === 'Shipping Charges' && orderSummary[i].value == 0) {
+    if (orderSummary[i].title === 'Shipping' && orderSummary[i].value === 0.00) {
       let newItem = orderSummary[i]
       newItem.value = 'Free'
       transformed = [...transformed, newItem];
@@ -39,7 +39,7 @@ export default function OrderSummary({ orderSummary }) {
               transformed.map(
                 (item) => item.value === "Free"
                   ? <div className="order-summary-value freeShipping orderTracking-para"> {item.value}</div>
-                  : <div className="order-summary-value orderTracking-para">&#8377; {item.value}</div>
+                  : <div className={`order-summary-value orderTracking-para ${item.title}`}>&#8377; {item.value}</div>
               )
             }
           </div>

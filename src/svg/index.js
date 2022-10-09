@@ -1,5 +1,2 @@
-import {ReactComponent as LeftArrow} from "./LeftArrow";
-
-export { default as LeftArrow } from LeftArrow;
-export {default as RightArrow } from "./RightArrow";
-export {default as DownArrow } from "./DownArrow";
+export {default as Help} from './help';
+export {default as LeftArrow} from './LeftArrow';

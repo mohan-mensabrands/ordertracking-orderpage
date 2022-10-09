@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function PaymentCard({ paymentMode }) {
   return (
@@ -10,3 +11,8 @@ export default function PaymentCard({ paymentMode }) {
     </div>
   )
 }
+
+PaymentCard.prototype = {
+  paymentMode : PropTypes.string
+}
+

@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Timeline({ events, ifCancelled, ifDelivered }) {
-  if (ifDelivered) {
+export default function Timeline({ events, orderData }) {
+  if (orderData.ifDelivered) {
     return (
       <div className="timeline">
         <div className="mensaDeliveredOrder">Delivered</div>
       </div>
     );
   }
-  if (ifCancelled) {
+  if (orderData.ifCancelled) {
     return (
       <div className="timeline">
         <div className="mensaCancelledOrder">Cancelled</div>
@@ -18,7 +18,15 @@ export default function Timeline({ events, ifCancelled, ifDelivered }) {
   }
 
   if (!events || events.length < 1) {
-    return <></>;
+    return (
+      <div className="timeline">
+        {orderData.today === orderData.orderDate ? (
+          <div className="mensaOrdered">Ordered Today</div>
+        ) : (
+          <div className="mensaOrdered">{`Ordered on ${orderData.orderDate}`}</div>
+        )}
+      </div>
+    );
   }
   return (
     <div className="timeline orderTrackingCard">
@@ -31,21 +39,20 @@ export default function Timeline({ events, ifCancelled, ifDelivered }) {
 
 Timeline.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object),
-  ifCancelled: PropTypes.bool,
-  ifDelivered: PropTypes.bool,
+  orderData: PropTypes.object,
 };
 
 function Event({ item }) {
   console.log("logging event ---> ", item);
-  let eventClass = "timeline-event orderTracking-para-bold " + item.state;
-  let dotlineClass = "dot-line " + item.state;
+  let eventClass = "timeline-event orderTracking-para-bold " + item.status;
+  let dotlineClass = "dot-line " + item.status;
   return (
     <div className={eventClass}>
       <div className={dotlineClass}>
         <div className="dot"> </div>
         <div className="line"> </div>
       </div>
-      {item.event}
+      {item.title}
     </div>
   );
 }

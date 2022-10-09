@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {ReactComponent as LeftArrow} from '../svg/LeftArrow.svg';
+import {LeftArrow} from '../svg'
 import {ReactComponent as DownArrow} from '../svg/DownArrow.svg';
 
 export default function Addresses({ addressData }) {

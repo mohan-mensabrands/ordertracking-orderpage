@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Timeline } from "../Components";
 
-export default function OrderInfoCard({ sku, ifCancelled, ifDelivered}) {
-  let items = sku.events;
+export default function OrderInfoCard({
+  events,
+  sku,
+  orderData
+}) {
   let discount = Math.floor(
     ((sku.itemPrice.totalPrice - sku.itemPrice.finalPrice) * 100) /
       sku.itemPrice.totalPrice
@@ -42,11 +45,50 @@ export default function OrderInfoCard({ sku, ifCancelled, ifDelivered}) {
           </div>
         </div>
       </div>
-      <Timeline items={sku.events} ifCancelled={ifCancelled} ifDelivered={ifDelivered}/>
+      <CreateTimeline
+        events={events}
+        sku={sku}
+        orderData={orderData}
+      />
+
       {/* <CancelOrder /> */}
     </>
   );
 }
+
+const CreateTimeline = ({ events, sku, orderData }) => {
+  let returnIndex = -1;
+  if(!events || orderData.ifCancelled || orderData.ifDelivered) {
+    return (
+      <Timeline
+        events={[]}
+        orderData={orderData}
+      />
+    );
+  }
+  if(events && events.length > 0 && sku && sku.itemId){
+    Object.keys(events).forEach(function (key, index) {
+      if (events[key].itemId === sku.itemId) {
+        console.log("found at", events[returnIndex]);
+        returnIndex = index;
+      }
+    });
+  }
+  if (returnIndex > -1) {
+    return (
+      <Timeline
+        events={events[returnIndex].events}
+        orderData={orderData}
+      />
+    );
+  }
+  return (
+    <Timeline
+      events={[]}
+      orderData={orderData}
+    />
+  );
+};
 
 OrderInfoCard.propTypes = {
   sku: PropTypes.shape({
@@ -60,8 +102,8 @@ OrderInfoCard.propTypes = {
     quantity: PropTypes.string,
     size: PropTypes.string,
     title: PropTypes.string,
-    events: PropTypes.arrayOf(PropTypes.object),
   }),
   ifCancelled: PropTypes.bool,
-  ifDelivered: PropTypes.bool
+  ifDelivered: PropTypes.bool,
+  events: PropTypes.arrayOf(PropTypes.object),
 };
