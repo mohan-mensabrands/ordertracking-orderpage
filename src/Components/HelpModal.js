@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function HelpModal({ show, onClose }) {
+export default function HelpModal({ contactDetails, show, onClose }) {
     if (show) {
         document.body.classList.add('mensaModalActive')
         let n = document.querySelectorAll('[title="Chat with us on WhatsApp"]')
@@ -13,17 +13,24 @@ export default function HelpModal({ show, onClose }) {
             <div className={show ? 'mensaShowHelp' : 'mensaHide'}>
                 <div className="mensaHelpContainer">
                     <div className="mensa20700">Share your Experience</div>
-                    <div className="orderTracking-xbold mensaCallAt"> Call us @ <span className='mensaHelpContact'>093-1174-9215</span></div>
-                    <a id='callHelp' href='tel:+919311749215' style={{ textDecorationLine: 'none', color: 'black' }}>
+                    <div className="orderTracking-xbold mensaCallAt"> Call us @ <span className='mensaHelpContact'>{contactDetails.phone}</span></div>
+                    <a id='callHelp' href={`tel:${contactDetails.phone}`} style={{ textDecorationLine: 'none', color: 'black' }}>
                         <div className="mensaHelpCall orderTracking-para-bold">
                             Call
                         </div>
                     </a>
-                    <a id='whatsappHelp' href='https://wa.me/+919311749215' target="_blank" rel='noreferrer' style={{ textDecorationLine: 'none', color: 'white' }}>
-                        <div className="mensaHelpWhatsapp">
-                            Whatsapp
-                        </div>
-                    </a>
+                    {contactDetails.whatsapp ?
+                        <a id='whatsappHelp' href={`https://wa.me/${contactDetails.whatsapp}`} target="_blank" rel='noreferrer' style={{ textDecorationLine: 'none', color: 'white' }}>
+                            <div className="mensaHelpWhatsapp">
+                                Whatsapp
+                            </div>
+                        </a> :
+                        <a id='emailHelp' href={`mailto:${contactDetails.email}`} target="_blank" rel='noreferrer'>
+                            <div className="mensaHelpEmail orderTracking-para-bold">
+                                Mail Us
+                            </div>
+                        </a>
+                    }
                 </div>
 
                 <div className='mensaModalClosebtn' onClick={onClose}> <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

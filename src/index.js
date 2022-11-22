@@ -263,6 +263,20 @@ const getItems = () => {
   return parsedItems;
 };
 
+const getContactDetails = () => {
+  try {
+    let contactDetails = document.getElementsByName('mensaContactDetails')[0]
+    let details = {
+      whatsapp: contactDetails.children.whatsapp.innerText,
+      email: contactDetails.children.email.innerText,
+      phone: contactDetails.children.phone.innerText
+    }
+    return details;
+  } catch (error) {
+    console.error('error fetching contact details')
+  }
+}
+
 orderData = {
   ...orderData,
   orderId: getData("orderId"),
@@ -274,6 +288,7 @@ orderData = {
   addresses: getAddresses(),
   orderSummary: getOrderSummary(),
   lineItems: getItems(),
+  contactDetails: getContactDetails()
 };
 
 console.log('orderdata', orderData)

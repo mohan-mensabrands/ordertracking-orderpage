@@ -85,7 +85,7 @@ function App({ orderData }) {
       <Addresses addressData={orderData.addresses} />
       <hr className="saparator" />
       <OrderSummary orderSummary={orderData.orderSummary} />
-      <HelpModal show={showHelp} onClose={() => setShowHelp(false)} />
+      <HelpModal contactDetails={orderData.contactDetails} show={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   );
 }
