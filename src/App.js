@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./App.css";
 import {
   Addresses,
+  HelpModal,
   OrderIdAndBack,
   OrderInfoCard,
   OrderSummary,
@@ -12,6 +13,7 @@ import {
 function App({ orderData }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showHelp, setShowHelp] = useState(false)
 
   useEffect(() => {
     if (orderData.ifDelivered) {
@@ -25,29 +27,32 @@ function App({ orderData }) {
 
     const fetchData = async () => {
       setLoading(true);
-      let event = await fetch(
-        `https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/shopify/details?channelOrderId=${orderData.orderId}`,
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbIlJPTEVfVVNFUiJdLCJpc3MiOiJ2aXNoYWwuY2hhdHVydmVkaUBtZW5zYWJyYW5kcy5jb20iLCJzdWIiOiIzNCIsImlhdCI6MTY2MjAyOTg1OSwianRpIjoiMGE3M2YxOTQtNzA5OS00MGRmLWFiNGItYWU3YjdjMzZjNGY4IiwiZXhwIjoxNzQ4NDI5ODU5fQ.ocNJhggQi2rlqYlGhM3kQPBukdYO_nvcZGXmG0PiW7I",
-          },
-        }
-      );
-      setLoading(false);
-      let res = await event.json();
+      try {
+        let event = await fetch(
+          `https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/shopify/details?channelOrderId=${orderData.orderId}`,
+          {
+            headers: {
+              Authorization:
+                "Bearer " +
+                "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbIlJPTEVfVVNFUiJdLCJpc3MiOiJ2aXNoYWwuY2hhdHVydmVkaUBtZW5zYWJyYW5kcy5jb20iLCJzdWIiOiIzNCIsImlhdCI6MTY2MjAyOTg1OSwianRpIjoiMGE3M2YxOTQtNzA5OS00MGRmLWFiNGItYWU3YjdjMzZjNGY4IiwiZXhwIjoxNzQ4NDI5ODU5fQ.ocNJhggQi2rlqYlGhM3kQPBukdYO_nvcZGXmG0PiW7I",
+            },
+          }
+        );
+        setLoading(false);
+        let res = await event.json();
 
-      if (res.status.statusCode !== 6000) {
-        console.log("order not found!");
-        return;
+        if (res.status.statusCode !== 6000) {
+          console.log("order not found!");
+          return;
+        }
+        setEvents(res.data);
+      } catch (error) {
+        console.error('error fetching api, please check network');
+        setLoading(false);
       }
-      setEvents(res.data);
+
     };
     fetchData();
-
-    // var dateFormate = { month: 'short', day: 'numeric' };
-    // let statusDate = new Date(sku[i].customerPromiseDate.replace(" ", "T"));
   }, [
     setEvents,
     orderData
@@ -58,8 +63,8 @@ function App({ orderData }) {
   }
 
   return (
-    <>
-      <OrderIdAndBack orderId={orderData.orderId} />
+    <div className="mensaOrderPage">
+      <OrderIdAndBack orderId={orderData.orderId} onClick={() => setShowHelp(!showHelp)} />
       <hr className="saparator-1px" />
       {orderData.lineItems.map((sku) => {
         return (
@@ -68,17 +73,20 @@ function App({ orderData }) {
               events={events}
               sku={sku}
               orderData={orderData}
+              onClick={() => setShowHelp(!showHelp)}
             />
+            <hr className="saparator" />
           </>
         );
       })}
-      <hr className="saparator" />
-      <OrderSummary orderSummary={orderData.orderSummary} />
-      <hr className="saparator" />
-      <PaymentCard paymentMode={orderData.financialStatus==='paid' ? 'Paid' : 'Cash on Delivery'}/>
+      
+      <PaymentCard paymentMode={orderData.financialStatus === 'paid' ? 'Paid' : 'Pay on Delivery'} />
       <hr className="saparator" />
       <Addresses addressData={orderData.addresses} />
-    </>
+      <hr className="saparator" />
+      <OrderSummary orderSummary={orderData.orderSummary} />
+      <HelpModal show={showHelp} onClose={() => setShowHelp(false)} />
+    </div>
   );
 }
 

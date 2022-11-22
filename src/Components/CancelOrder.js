@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function cancelOrder() {
+export default function cancelOrder({onClick}) {
   return (
     <div className='orderTrackingCard'>
-      <div className="cancel-order">
+      <div className="cancel-order" onClick={onClick}>
         <span className="orderTracking-para-bold">
-          Cancel Order
+          Contact Customer Support
         </span>
         <div className='cancel-order-arrow'>
           <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">

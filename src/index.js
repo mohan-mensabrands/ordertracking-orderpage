@@ -56,20 +56,25 @@ const getAddresses = () => {
       label: "Shipping Address",
       value: `${getEle("name")}, ${getEle("address1")}, ${getEle(
         "address2"
-      )}, ${getEle("city")}, ${getEle("province")}, ${getEle("zip")}`,
+      )}, ${getEle("city")}`,
       contact: getEle("phone"),
+      state:`${getEle("province")}`,
+      pinCode: `${getEle("zip")}`
     };
     toRet.push(sa);
   }
-  add = billingAddress();
-  if (add != null) {
+  let ba = billingAddress();
+  if(ba === '' && ba !== null && ba !== 'null') add = ba;
+  if (add !== null && add !== 'null') {
     let ba = {
       title: "billingAddress",
       label: "Billing Address",
       value: `${getEle("name")}, ${getEle("address1")}, ${getEle(
         "address2"
-      )}, ${getEle("city")}, ${getEle("province")}, ${getEle("zip")}`,
+      )}, ${getEle("city")}`,
       contact: getEle("phone"),
+      state:`${getEle("province")}`,
+      pinCode: `${getEle("zip")}`
     };
     toRet.push(ba);
     return toRet;
@@ -106,22 +111,50 @@ const getOrderSummary = () => {
   } catch (error) {
     console.error("error fetching tax");
   }
+  let discountCode = ''
+  try {
+    discountCode =
+      document.getElementsByName("discountCode")[0].innerText;
+  } catch (error) {
+    console.error("No discount Code found");
+  }
+  let taxVals = []
+  try {
+    let taxes = document.getElementsByName('taxValues');
+    taxes.forEach((tax)=> {
+      taxVals.push({title: `Tax (${tax.children.taxTitle.innerText} ${tax.children.taxRate.innerText} % )`, value:`${tax.children.taxVal.innerText}`})
+    })
+    // console.log('taxvals', taxVals);
+  }catch{
+    console.error('No taxes found')
+  }
 
   let mrp = {
-    title: "Total MRP",
+    title: "Total Selling Price",
     value:
       parseFloat(raw.total) -
       parseFloat(raw.shipping) +
-      parseFloat(raw.discount) -
-      parseFloat(raw.tax)
+      parseFloat(raw.discount) 
+      //parseFloat(raw.tax)
       ,
   };
   let discount = {title: 'Discount', value: parseFloat(raw.discount)}
-  let subTotal = {title: 'SubTotal', value: mrp.value - discount.value}
-  let shipping = {title: 'Shipping', value: parseFloat(raw.shipping)}
+  let subTotal = {title: 'Sub Total', value: mrp.value - discount.value}
+  let shipping = {title: 'Shipping Charges', value: parseFloat(raw.shipping)}
   let total = {title: 'Total', value: raw.total}
-  let tax = {title: 'Tax', value: raw.tax}
-  orderSummary.push(mrp, discount, subTotal, shipping,tax, total)
+  //let tax = {title: 'Tax', value: raw.tax}
+  if(discountCode !== '') {
+    discount = {...discount, code : discountCode}
+  }
+  orderSummary.push(
+    mrp, 
+    discount, 
+    subTotal, 
+    shipping, 
+    //tax, 
+    )
+  taxVals.forEach((val)=>orderSummary.push(val))
+  orderSummary.push(total)
   return orderSummary;
 };
 
@@ -130,16 +163,17 @@ const getItems = () => {
   let items = document.getElementsByName("lineItems")[0].childNodes;
   items.forEach((item) => {
     let itemToPush = {
+      productLink: "#",
       itemId: "",
       title: "",
-      size: "",
-      color: "",
       imageUrl: "",
       itemPrice: {
         totalPrice: "",
         finalPrice: "",
+        pricePerUnit: ""
       },
-      quantity: "",
+      attributes:[],
+      trackingLink: ""
     };
     try {
       itemToPush.itemId = item.children.itemId.innerText;
@@ -172,28 +206,58 @@ const getItems = () => {
     } catch (error) {
       console.error("item Final Price not found");
     }
+    try {
+      itemToPush.itemPrice.pricePerUnit =
+        item.children.itemPrice.children.pricePerUnit.innerText;
+    } catch (error) {
+      console.error("item Final Price not found");
+    }
 
     try {
-      itemToPush.quantity = item.children.quantity.innerText;
+      itemToPush.productLink = item.children.productLink.href
+    } catch (error) {
+      console.error("item product link not found");
+    }
+
+    let attr = []
+    let qty = ''
+    try {
+      qty = item.children.quantity.innerText;
+      attr.push(qty)
     } catch (error) {
       console.error("item qty not found");
     }
     try {
-      itemToPush.quantity = item.children.quantity.innerText;
+      let att =  item.children[6].children
+      for(let attrib of att) {
+        attr.push( attrib.innerText)
+      }
     } catch (error) {
-      console.error("item qty not found");
-    }
-    try {
-      itemToPush.size = item.children.size.innerText;
-    } catch (error) {
-      console.error("item size not found");
-    }
-    try {
-      itemToPush.color = item.children.color.innerText;
-    } catch (error) {
-      console.error("item color not found");
+      console.log('NO attributes in prod');
     }
 
+    try {
+      itemToPush.trackingLink = item.children.trackingLink.innerText
+    } catch (error) {
+      console.log('Tracking Link Not Found!');
+    }
+    // try {
+    //   size = item.children.size.innerText;
+    // } catch (error) {
+    //   console.error("item size not found");
+    // }
+    // try {
+    //   color = item.children.color.innerText;
+    // } catch (error) {
+    //   console.error("item color not found");
+    // }
+
+    // let attributes = []
+    // if(qty && qty !== "") attributes.push({title: 'Qty', value: qty})
+    // if(size && size !== "") attributes.push({title: 'Size', value: size})
+    // if(color && color !== "") attributes.push({title: 'Color', value: color})
+    
+    itemToPush.attributes = attr
     parsedItems.push(itemToPush);
   });
   return parsedItems;
@@ -203,7 +267,7 @@ orderData = {
   ...orderData,
   orderId: getData("orderId"),
   ifCancelled: "true" === getData("ifCancelled"),
-  ifDelivered: "fulfilled" === getData("fullfillmentStatus"),
+  ifDelivered: false,
   financialStatus: getData("financialStatus"),
   orderDate: getData("orderDate"),
   today: getData("today"),
@@ -211,6 +275,8 @@ orderData = {
   orderSummary: getOrderSummary(),
   lineItems: getItems(),
 };
+
+console.log('orderdata', orderData)
 
 root.render(
   // <React.StrictMode>

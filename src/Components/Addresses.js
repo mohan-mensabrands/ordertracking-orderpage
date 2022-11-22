@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import {LeftArrow} from '../svg'
-import {ReactComponent as DownArrow} from '../svg/DownArrow.svg';
+import { LeftArrow } from '../svg'
+import { ReactComponent as DownArrow } from '../svg/DownArrow.svg';
 
 export default function Addresses({ addressData }) {
   return (
@@ -24,15 +24,19 @@ function Address({ address }) {
         <div className="orderTracking-svg">
           {
             showAddress ?
-              <DownArrow/>
+              <DownArrow />
               :
-              <LeftArrow/>
+              <LeftArrow />
           }
         </div>
       </div>
       {showAddress ?
         <div className={address.title + '-value'}>
           {address.value}
+          <div className="stateAndPin">
+            <div className={address.title + '-state'}>State: {address.state} </div>
+            <div className={address.title + '-pin'}>Pincode: {address.pinCode}</div>
+          </div>
           <div className={address.title + '-phone'}>Mobile: {address.contact}</div>
         </div> :
         <></>

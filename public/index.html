@@ -25,43 +25,475 @@
   <title>React App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="orderData" style="display:none">
-    <div name="ifCancelled">false</div>
+  <!-- <div class="customer order" style="padding:0; margin-top:10px">
+    <div class="orderId-back-button" style="display:none">
+      <a id="orderTrackingBackButton" href="/account"> 4269804519559 </a>
+    </div>
+    <div id="orderData" style="display:none">
+      <div name="ifCancelled">false</div>
+      <div name="fullfillmentStatus">unfulfilled</div>
+      <div name="orderId">4269804519559</div>
+      <div name="orderDate">October 14, 2022</div>
+      <div name="today">October 14, 2022</div>
+      <div name="financialStatus">paid</div>
+      <div name="addresses">
+        <div name="shippingAddress">{"first_name":"mohan","address1":"asdfasf","phone":"+91 1234 123 412","city":"bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"g","address2":"adsfasdf","company":"mensa","latitude":null,"longitude":null,"name":"mohan g","country_code":"IN","province_code":"KA"}</div>
+        <div name="billingAddress">null</div>
+      </div>
+      <div name="orderSummary">
+        <div name="total">499</div>
+        <div name="discount">0</div>
+        <div name="subTotal">499</div>
+        <div name="shippingCharges">0</div>
+        <div name="tax">21</div>
+      </div>
+      <div name="lineItems"><div name="11059970998407">
+          <div name="itemId">5199594291335</div>
+          <div name="itemTitle">German Silver Oxidised Ghungroo Jewellery Set With Ring &amp; Nosepin</div>
+          <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10301.M_120X90.jpg?v=1659080758"></div>
+          <div name="itemPrice">
+            <div name="totalPrice">499.00</div>
+            <div name="finalPrice">499.00</div>
+          </div>
+          <div name="quantity">Qty: 1</div>
+          <ul class="orderAttributes">
+            <li>Size: One Size</li>
+          </ul>
+          
+        </div></div>
+    </div>
+    <div id="order-tracking"></div>
+    <link href="//cdn.shopify.com/s/files/1/0329/7178/4327/t/50/assets/mensa-order.css?v=40254307163242931471665750636" rel="stylesheet" type="text/css" media="all">
+    <script src="//cdn.shopify.com/s/files/1/0329/7178/4327/t/50/assets/mensa-order.js?v=141308422920964496711665751921" type="text/javascript"></script>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+    <div name="ifCancelled">true</div>
     <div name="fullfillmentStatus">unfulfilled</div>
-    <div name="orderId">4998719602778</div>
-    <div name="orderDate">October 09, 2022</div>
-    <div name="today">October 09, 2022</div>
-    <div name="financialStatus">unpaid</div>
+    <div name="orderId">4272827334791</div>
+    <div name="orderDate">October 17, 2022</div>
+    <div name="today">October 20, 2022</div>
+    <div name="financialStatus">paid</div>
     <div name="addresses">
-      <div name="shippingAddress">{"first_name":"mohan","address1":"swimming pool marathalli","phone":"1234 141 232","city":"bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"G","address2":"doob gaya","company":null,"latitude":12.9240338,"longitude":77.6439832,"name":"mohan G","country_code":"IN","province_code":"KA"}</div>
-      <div name="billingAddress">{"first_name":"mohan","address1":"swimming pool marathalli","phone":"1234 141 232","city":"bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"G","address2":"doob gaya","company":null,"latitude":12.9240338,"longitude":77.6439832,"name":"mohan G","country_code":"IN","province_code":"KA"}</div>
+      <div name="shippingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
     </div>
     <div name="orderSummary">
-      <div name="total">371.70</div>
-      <div name="discount">35.00</div>
-      <div name="subTotal">315.00</div>
-      <div name="shippingCharges">0.00</div>
-      <div name="tax">56.70</div>
+      <div name="total">1499</div>
+      <div name="discount">0</div>
+      <div name="subTotal">1499</div>
+      <div name="shippingCharges">0</div>
+      <div name="tax">64</div>
     </div>
-    <div name="lineItems"><div name="13476160733274">
-        <div name="itemId">6774207184986</div>
-        <div name="itemTitle">cool moon shirt</div>
-        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0567/4847/4458/products/CC_Express_20220612_2134030.09249268431178614_120X90.png?v=1664174526"></div>
+    <div name="lineItems"><div name="11066391199879">
+        <div name="itemId">4756009353351</div>
+        <div name="itemTitle">Pink Ruby Gold Plated Floral Jewellery Set</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10191_1_120X90.jpg?v=1597552773"></div>
         <div name="itemPrice">
-          <div name="totalPrice">350.00</div>
-          <div name="finalPrice">315.00</div>
+          <div name="totalPrice">1,499.00</div>
+          <div name="finalPrice">1,499.00</div>
         </div>
-        <div name="quantity">1</div>
-        <div name="size">m</div>
-        <div name="color">red</div>
+        <div name="quantity">Qty: 1</div>
+<!--         <div name='size'>One Size</div>
+        <div name='color'></div> -->
+  <!-- <ul class="orderAttributes">
+                <li>Size: One Size</li>
+              </ul>
+        
       </div></div>
-  </div>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+    <div name="ifCancelled">false</div>
+    <div name="fullfillmentStatus">unfulfilled</div>
+    <div name="orderId">4276646051975</div>
+    <div name="orderDate">October 20, 2022</div>
+    <div name="today">October 20, 2022</div>
+    <div name="financialStatus">pending</div>
+    <div name="addresses">
+      <div name="shippingAddress">{"first_name":"test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":12.8967561,"longitude":77.6396445,"name":"test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":null,"longitude":null,"name":"test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+    </div>
+    <div name="orderSummary">
+      <div name="total">2250</div>
+      <div name="discount">397</div>
+      <div name="subTotal">2250</div>
+      <div name="shippingCharges">0</div>
+      <div name="tax">96</div>
+      
+        <div name="discountCode">HOPE2022</div>
+      
+    </div>
+    <div name="lineItems"><div name="11075116204167">
+        <div name="itemId">6812857663623</div>
+        <div name="itemTitle">Priyaasi 2g Sterling Silver Coin</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/coinback_2_120X90.jpg?v=1665126402"></div>
+        <a name="productLink" href="/products/silver-coin"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">0.00</div>
+          <div name="finalPrice">0.00</div>
+        </div>
+        <div name="quantity">Qty: 1</div>
+      </div><div name="11075116236935">
+        <div name="itemId">6535583629447</div>
+        <div name="itemTitle">Moon Shine-American Diamond Silver Plated Jewellery Set</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10201_1_aad5a5ab-540e-4fa3-9c9b-12c88e06568a_120X90.jpg?v=1614167901"></div>
+        <a name="productLink" href="/products/silver-plated-circular-shape-american-diamond-studded-party-wear-jewellery-set-nl-pr-10201"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">1,699.00</div>
+          <div name="finalPrice">1,444.15</div>
+        </div>
+        <div name="quantity">Qty: 1</div>
+
+              <ul class="orderAttributes">
+                <li>Size: One Size</li>
+              </ul>
+        
+      </div><div name="11075116269703">
+        <div name="itemId">6620318007431</div>
+        <div name="itemTitle">Leaf Twirl - Maroon Ruby American Diamond Gold Plated Jewellery Set</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10613.CR_120X90.jpg?v=1631954479"></div>
+        <a name="productLink" href="/products/nl-pr-10613"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">949.00</div>
+          <div name="finalPrice">806.65</div>
+        </div>
+        <div name="quantity">Qty: 1</div>
+
+      </div></div>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+    <div name="ifCancelled">false</div>
+    <div name="fullfillmentStatus">unfulfilled</div>
+    <div name="orderId">4282427637895</div>
+    <div name="orderDate">October 26, 2022</div>
+    <div name="today">October 26, 2022</div>
+    <div name="financialStatus">pending</div>
+    <div name="addresses">
+      <div name="shippingAddress">{"first_name":"Test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":12.8967561,"longitude":77.6396445,"name":"Test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"Test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":12.8967561,"longitude":77.6396445,"name":"Test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+    </div>
+    <div name="orderSummary">
+      <div name="total">1898</div>
+      <div name="discount">0</div>
+      <div name="subTotal">1898</div>
+      <div name="shippingCharges">0</div>
+      <div name="tax">81</div>
+      
+    </div>
+    <div name="lineItems"><div name="11087341027463">
+        <div name="itemId">4756144062599</div>
+        <div name="itemTitle">Set of 2 Rose Gold Plated Leaf Design American Diamond Studded Bangles</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40131-2-4_1_120X90.jpg?v=1602064086"></div>
+        <a name="productLink" href="/products/set-of-2-rose-gold-plated-leaf-designed-american-diamond-studded-bangles-ba-pr-40131-2-4"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">949.00</div>
+          <div name="finalPrice">949.00</div>
+        </div>
+        <div name="quantity">Qty: 2</div>
+              <ul class="orderAttributes">
+                <li>Size: 2.4</li>
+              </ul>
+        
+      </div></div>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+    <div name="ifCancelled">true</div>
+    <div name="fullfillmentStatus">unfulfilled</div>
+    <div name="orderId">4282427637895</div>
+    <div name="orderDate">October 26, 2022</div>
+    <div name="today">October 26, 2022</div>
+    <div name="financialStatus">voided</div>
+    <div name="addresses">
+      <div name="shippingAddress">{"first_name":"Test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":12.8967561,"longitude":77.6396445,"name":"Test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"Test","address1":"House 283","phone":"+91 84331 48434","city":"Bengaluru","zip":"560068","province":"Karnataka","country":"India","last_name":"do not dispatch","address2":"sector 6","company":"mensa","latitude":12.8967561,"longitude":77.6396445,"name":"Test do not dispatch","country_code":"IN","province_code":"KA"}</div>
+    </div>
+    <div name="orderSummary">
+      <div name="total">1898</div>
+      <div name="discount">0</div>
+      <div name="subTotal">1898</div>
+      <div name="shippingCharges">0</div>
+      <div name="tax">81</div>
+      
+    </div>
+    <div name="lineItems"><div name="11087341027463">
+        <div name="itemId">4756144062599</div>
+        <div name="itemTitle">Set of 2 Rose Gold Plated Leaf Design American Diamond Studded Bangles</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40131-2-4_1_120X90.jpg?v=1602064086"></div>
+        <a name="productLink" href="/products/set-of-2-rose-gold-plated-leaf-designed-american-diamond-studded-bangles-ba-pr-40131-2-4"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">949.00</div>
+          <div name="pricePerUnit">949.00</div>
+          <div name="finalPrice">1,898.00</div>
+        </div>
+        <div name="quantity">Qty: 2</div>
+              <ul class="orderAttributes">
+                <li>Size: 2.4</li>
+              </ul>
+
+      </div></div>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+    <div name="ifCancelled">false</div>
+    <div name="fullfillmentStatus">unfulfilled</div>
+    <div name="orderId">4282485047431</div>
+    <div name="orderDate">October 26, 2022</div>
+    <div name="today">October 26, 2022</div>
+    <div name="financialStatus">voided</div>
+    <div name="addresses">
+      <div name="shippingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+    </div>
+    <div name="orderSummary">
+      <div name="total">1227</div>
+      <div name="discount">0</div>
+      <div name="subTotal">1227</div>
+      <div name="shippingCharges">0</div>
+      <div name="tax">52</div>
+      
+    </div>
+    <div name="lineItems"><div name="11087457812615">
+        <div name="itemId">11087457812615</div>
+        <div name="itemTitle">Gold-Plated Artificial Stone Studded Mangalsutra</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/MGS-PR-10054.CR_120X90.jpg?v=1620379360"></div>
+        <a name="productLink" href="/products/gold-plated-artificial-stone-studded-mangalsutra-mgs-pr-10054"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">429.00</div>
+          <div name="pricePerUnit">429.00</div>
+          <div name="finalPrice">429.00</div>
+        </div>
+        <div name="quantity">Qty: 1</div>
+      </div><div name="11087457845383">
+        <div name="itemId">11087457845383</div>
+        <div name="itemTitle">Black Beads Silver Plated Traditional Anklets</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/ANK-PR-10057.CR_86b29baf-a8ff-4186-b5cb-4e333ed36579_120X90.jpg?v=1614597933"></div>
+        <a name="productLink" href="/products/black-beads-silver-plated-traditional-anklets-ank-pr-10057"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">399.00</div>
+          <div name="pricePerUnit">399.00</div>
+          <div name="finalPrice">798.00</div>
+        </div>
+        <div name="quantity">Qty: 2</div>
+              <ul class="orderAttributes">
+                <li>Size: One Size</li><li>Color: Black</li>
+              </ul>
+        
+      </div></div>
+  </div> -->
+
+
+  <!-- <div id="orderData" style="display:none">
+            <div name="ifCancelled">false</div>
+        <div name="fullfillmentStatus">unfulfilled</div>
+        <div name="orderId">4282484523143</div>
+        <div name="orderDate">October 26, 2022</div>
+        <div name="today">October 26, 2022</div>
+        <div name="financialStatus">voided</div>
+        <div name="addresses">
+          <div name="shippingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+          <div name="billingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+        </div>
+        <div name="orderSummary">
+          <div name="total">1038</div>
+          <div name="discount">0</div>
+          <div name="subTotal">1038</div>
+          <div name="shippingCharges">0</div>
+          <div name="tax">44</div>
+          
+        </div>
+        <div name="lineItems"><div name="11087456796807">
+            <div name="itemId">11087456796807</div>
+            <div name="itemTitle">Designer Rose Gold Plated American Diamond Stud Earring For Women And Girls</div>
+            <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/EAR-PR-50155_1_120X90.jpg?v=1597806972"></div>
+            <a name="productLink" href="/products/designer-rose-gold-plated-american-diamond-stud-earring-for-women-and-girls-ear-pr-50155"></a>
+            <div name="itemPrice">
+              <div name="totalPrice">519.00</div>
+              <div name="pricePerUnit">519.00</div>
+              <div name="finalPrice">1,038.00</div>
+            </div>
+            <div name="quantity">Qty: 2</div>
+                  <ul class="orderAttributes">
+                    <li>Size: One Size</li>
+                  </ul>
+            
+          </div></div>
+      </div> -->
+  <!-- <div id="orderData" style="display:none">
+        <div name="ifCancelled">false</div>
+    <div name="fullfillmentStatus">unfulfilled</div>
+    <div name="orderId">4512042319930</div>
+    <div name="orderDate">October 26, 2022</div>
+    <div name="today">October 26, 2022</div>
+    <div name="financialStatus">voided</div>
+    <div name="addresses">
+      <div name="shippingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+      <div name="billingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
+    </div>
+    <div name="orderSummary">
+      <div name="total">448</div>
+      <div name="discount">0</div>
+      <div name="subTotal">369</div>
+      <div name="shippingCharges">79</div>
+      <div name="tax">15</div>
+      
+    </div>
+    <div name="lineItems"><div name="11685682610234-3">
+        <div name="itemId">11685682610234-3</div>
+        <div name="itemTitle">Designer Stone Studded Gold Plated Maroon Colour Silk Threaded Latest Stylish Traditional Bangles For Women And Girls Set Of 8</div>
+        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40069-2-6_1_e7986825-3768-4f28-b964-2b1e476e80f3_120X90.jpg?v=1597720426"></div>
+        <a name="productLink" href="/products/designer-stone-studded-gold-plated-maroon-colour-silk-threaded-latest-stylish-traditional-bangles-for-women-and-girls-set-of-8-ba-pr-40069-2-4"></a>
+        <div name="itemPrice">
+          <div name="totalPrice">369.00</div>
+          <div name="pricePerUnit">369.00</div>
+          <div name="finalPrice">369.00</div>
+        </div>
+        <div name="quantity">Qty: 1</div>
+
+              <ul class="orderAttributes">
+                <li>Size: 2.4</li>
+              </ul>
+        
+      </div></div>
+  </div> -->
+  <!-- <div id="orderData" style="display:none">
+            <div name="ifCancelled">false</div>
+        <div name="fullfillmentStatus">unfulfilled</div>
+        <div name="orderId">4299950751879</div>
+        <div name="orderDate">November 10, 2022</div>
+        <div name="today">November 10, 2022</div>
+        <div name="financialStatus">pending</div>
+        <div name="addresses">
+          <div name="shippingAddress">{"first_name":"Do Not","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"Do Not Dispatch","country_code":"IN","province_code":"KA"}</div>
+          <div name="billingAddress">{"first_name":"Do Not","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do not dispatch for testing purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"Do Not Dispatch","country_code":"IN","province_code":"KA"}</div>
+        </div>
+        <div name="orderSummary">
+          <div name="total">1568</div>
+          <div name="discount">0</div>
+          <div name="subTotal">1568</div>
+          <div name="shippingCharges">0</div>
+          <div name="tax">67</div>
+          
+                 <div name="taxValues">
+                   <div name="taxTitle">  CGST </div>
+                   <div name="taxRate"> 1.5 </div>
+                   <div name="taxVal"> 22.51</div>
+                 </div>
+          
+                 <div name="taxValues">
+                   <div name="taxTitle">  SGST </div>
+                   <div name="taxRate"> 3.0 </div>
+                   <div name="taxVal"> 45.01</div>
+                 </div>
+          
+          
+        </div>
+        <div name="lineItems"><div name="11124512718983">
+            <div name="trackingLink"></div>
+            <div name="itemId">11124512718983</div>
+            <div name="itemTitle">Designer Stone Studded Gold Plated Maroon Colour Silk Threaded Latest Stylish Traditional Bangles For Women And Girls Set Of 8</div>
+            <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40069-2-6_1_e7986825-3768-4f28-b964-2b1e476e80f3_120X90.jpg?v=1597720426"></div>
+            <a name="productLink" href="/products/designer-stone-studded-gold-plated-maroon-colour-silk-threaded-latest-stylish-traditional-bangles-for-women-and-girls-set-of-8-ba-pr-40069-2-4"></a>
+            <div name="itemPrice">
+              <div name="totalPrice">369.00</div>
+              <div name="pricePerUnit">369.00</div>
+              <div name="finalPrice">369.00</div>
+            </div>
+            <div name="quantity">Qty: 1</div>
+                  <ul class="orderAttributes">
+                    <li>Size: 2.4</li>
+                  </ul>
+            
+          </div><div name="11124512751751">
+            <div name="trackingLink"></div>
+            <div name="itemId">11124512751751</div>
+            <div name="itemTitle">Handcrafted Floral Red and Green Bracelet</div>
+            <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BR-PR-20138_1_120X90.jpg?v=1605947238"></div>
+            <a name="productLink" href="/products/handcrafted-floral-red-and-green-bracelet-br-pr-20138"></a>
+            <div name="itemPrice">
+              <div name="totalPrice">1,199.00</div>
+              <div name="pricePerUnit">1,199.00</div>
+              <div name="finalPrice">1,199.00</div>
+            </div>
+            <div name="quantity">Qty: 1</div>
+          </div></div>
+      </div> -->
+      <div id="orderData" style="display:none">
+        <!--     <div name='ifCancelled'>true</div> -->
+        <div name="ifCancelled">false</div>
+        <div name="fullfillmentStatus">unfulfilled</div>
+        <div name="orderId">4299950751879</div>
+        <div name="orderDate">November 10, 2022</div>
+        <div name="today">November 22, 2022</div>
+        <div name="financialStatus">voided</div>
+        <div name="addresses">
+          <div name="shippingAddress">{"first_name":"Do Not","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"Do Not Dispatch","country_code":"IN","province_code":"KA"}</div>
+          <div name="billingAddress">{"first_name":"Do Not","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do not dispatch for testing purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"Do Not Dispatch","country_code":"IN","province_code":"KA"}</div>
+        </div>
+        <div name="orderSummary">
+          <div name="total">1568</div>
+          <div name="discount">0</div>
+          <div name="subTotal">1568</div>
+          <div name="shippingCharges">0</div>
+          <div name="tax">67</div>
+          
+            <div name="taxValues">
+              <div name="taxTitle">
+                CGST
+              </div>
+              <div name="taxRate">
+                1.5
+              </div>
+              <div name="taxVal">
+                22.51</div>
+            </div>
+          
+            <div name="taxValues">
+              <div name="taxTitle">
+                SGST
+              </div>
+              <div name="taxRate">
+                3.0
+              </div>
+              <div name="taxVal">
+                45.01</div>
+            </div>
+          
+          
+        </div>
+        <div name="lineItems"><div name="11124512718983">
+              <div name="trackingLink">https://www.google.com</div>
+              <div name="itemId">11124512718983</div>
+              <div name="itemTitle">Designer Stone Studded Gold Plated Maroon Colour Silk Threaded Latest Stylish Traditional Bangles For Women And Girls Set Of 8</div>
+              <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40069-2-6_1_e7986825-3768-4f28-b964-2b1e476e80f3_120X90.jpg?v=1597720426"></div>
+              <a name="productLink" href="/products/designer-stone-studded-gold-plated-maroon-colour-silk-threaded-latest-stylish-traditional-bangles-for-women-and-girls-set-of-8-ba-pr-40069-2-4"></a>
+              <div name="itemPrice">
+                <div name="totalPrice">369.00</div>
+                <div name="pricePerUnit">369.00</div>
+                <div name="finalPrice">369.00</div>
+              </div>
+              <div name="quantity">Qty: 1</div>
+                <ul class="orderAttributes">
+                  <li>Size: 2.4</li>
+                </ul>
+              
+            </div><div name="11124512751751">
+              <div name="trackingLink"></div>
+              <div name="itemId">11124512751751</div>
+              <div name="itemTitle">Handcrafted Floral Red and Green Bracelet</div>
+              <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BR-PR-20138_1_120X90.jpg?v=1605947238"></div>
+              <a name="productLink" href="/products/handcrafted-floral-red-and-green-bracelet-br-pr-20138"></a>
+              <div name="itemPrice">
+                <div name="totalPrice">1,199.00</div>
+                <div name="pricePerUnit">1,199.00</div>
+                <div name="finalPrice">1,199.00</div>
+              </div>
+              <div name="quantity">Qty: 1</div>
+            </div></div>
+      </div>
   <div id="order-tracking"></div>
 </body>
 

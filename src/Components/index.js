@@ -6,3 +6,4 @@ export { default as Timeline } from "./Timeline";
 export { default as CancelOrder } from "./CancelOrder";
 export { default as PaymentCard } from "./PaymentCard";
 export { default as OrderSummary } from "./OrderSummary";
+export { default as HelpModal } from "./HelpModal";

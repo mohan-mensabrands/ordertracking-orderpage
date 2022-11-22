@@ -1,33 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Help, LeftArrow } from "../svg";
+import { Help } from "../svg";
 
-export default function OrderIdAndBack({ orderId }) {
-  const [showHelp, setShowHelp] = useState(false);
+export default function OrderIdAndBack({ orderId, onClick }) {
   return (
     <>
       <div className="orderId-back-button orderTrackingCard">
-        <div
+        {/* <div
           className="button-back"
           onClick={() =>
             document.getElementById("orderTrackingBackButton").click()
           }
         >
           <LeftArrow />
+        </div> */}
+        <div className="orderTracking-heading">
+          Order Id: {orderId}
         </div>
-        <div>
-          <span> Order {orderId}</span>
-        </div>
-        <div style={{ marginRight: "auto" }}> </div>
-        <div className="mensaHelpSvg" onClick={() => setShowHelp(!showHelp)}>
+        <div className="helpIcon" id="orderHelp" onClick={onClick}>
+          <div className="helpText ">Help</div> 
           <Help />
         </div>
       </div>
-      {showHelp ? (
-        <div className="mensaHelpSection">Please call us at 123456789</div>
-      ) : (
-        <></>
-      )}
     </>
   );
 }

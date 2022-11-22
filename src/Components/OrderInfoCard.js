@@ -5,27 +5,25 @@ import { Timeline } from "../Components";
 export default function OrderInfoCard({
   events,
   sku,
-  orderData
+  orderData,
+  onClick
 }) {
-  let discount = Math.floor(
-    ((sku.itemPrice.totalPrice - sku.itemPrice.finalPrice) * 100) /
-      sku.itemPrice.totalPrice
+  let discount = Math.round(
+    ((sku.itemPrice.totalPrice.replace(',', '') - sku.itemPrice.finalPrice.replace(',', '')) * 100) /
+    sku.itemPrice.totalPrice.replace(',', '')
   );
   return (
     <>
       <div className="order-info orderTrackingCard">
-        <img className="product-image" src={sku.imageUrl} alt="product" />
+        <img className="product-image" src={sku.imageUrl} alt="product" id="redirectToProductLink" onClick={() => window.open(sku.productLink,"_self")}/>
         <div className="product-info">
-          <div className="product-name orderTracking-para">{sku.title}</div>
-          <div className="product-size">
-            <span className="title">Size: </span>
-            <span className="value">{sku.size}</span>
-            <span className="spacer"></span>
-            <span className="title">Color: </span>
-            <span className="value">{sku.color}</span>
-            <span className="spacer"></span>
-            <span className="title">Qty: </span>
-            <span className="value">{sku.quantity}</span>
+          <div className="productTitle-attributes">
+            <div className="product-name orderTracking-para">{sku.title}</div>
+            <div className="product-size">
+              {sku.attributes.map((att) =>
+              <div className="titleValuePair">{att}</div>
+              )}
+            </div>
           </div>
           <div className="price">
             <span className="final-price">
@@ -37,11 +35,12 @@ export default function OrderInfoCard({
                   {" "}
                   &#8377; {sku.itemPrice.totalPrice}
                 </span>
-                <span className="discount-percent">{discount}%</span>
+                <span className="discount-percent">{discount}% off</span>
               </>
             ) : (
               <></>
             )}
+            {sku.attributes[0].split(':')[1] > 1 ? <div className="mensaQtyXPrice">( &#8377;{` ${sku.itemPrice.pricePerUnit} X ${sku.attributes[0].split(':')[1]} )`}</div>:<></>}
           </div>
         </div>
       </div>
@@ -50,15 +49,20 @@ export default function OrderInfoCard({
         sku={sku}
         orderData={orderData}
       />
-
-      {/* <CancelOrder /> */}
+      {/* <CancelOrder onClick={onClick}/> */}
     </>
   );
 }
 
 const CreateTimeline = ({ events, sku, orderData }) => {
+  // console.log('trackingLink', sku.trackingLink);
   let returnIndex = -1;
-  if(!events || orderData.ifCancelled || orderData.ifDelivered) {
+  let eventsProp = []
+  const sortf = (a, b) => {
+    if (a.index > b.index) return -1
+    return 1
+  }
+  if (!events || orderData.ifCancelled) {
     return (
       <Timeline
         events={[]}
@@ -66,25 +70,27 @@ const CreateTimeline = ({ events, sku, orderData }) => {
       />
     );
   }
-  if(events && events.length > 0 && sku && sku.itemId){
+  if (events && events.length > 0 && sku && sku.itemId) {
     Object.keys(events).forEach(function (key, index) {
-      if (events[key].itemId === sku.itemId) {
-        console.log("found at", events[returnIndex]);
+      if (events[key].itemId.split('-')[0] === sku.itemId) {
         returnIndex = index;
+        eventsProp = events[key].events.sort(sortf);
+        eventsProp.status = events[key].status;
+        eventsProp.trackingLink = sku.trackingLink;
       }
     });
   }
   if (returnIndex > -1) {
     return (
       <Timeline
-        events={events[returnIndex].events}
+        events={eventsProp}
         orderData={orderData}
       />
     );
   }
   return (
     <Timeline
-      events={[]}
+      events={[{index:0, title:'Created', status:0, dateTime: orderData.orderDate, trackingLink: sku.trackingLink}]}
       orderData={orderData}
     />
   );

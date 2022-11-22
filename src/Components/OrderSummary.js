@@ -7,7 +7,7 @@ export default function OrderSummary({ orderSummary }) {
     if (orderSummary[i].title === 'Discount' && orderSummary[i].value === 0.00) {
       continue;
     }
-    if (orderSummary[i].title === 'Shipping' && orderSummary[i].value === 0.00) {
+    if (orderSummary[i].title === 'Shipping Charges' && orderSummary[i].value === 0.00) {
       let newItem = orderSummary[i]
       newItem.value = 'Free'
       transformed = [...transformed, newItem];
@@ -20,7 +20,7 @@ export default function OrderSummary({ orderSummary }) {
   return (
     <div className="orderTrackingCard">
       <div className="orderSummary">
-        <div className="orderTracking-heading" style={{ marginTop: '15px' }}>
+        <div className="orderTracking-heading titleMargin">
           Order Summary
         </div>
         <div className="orderDetailsContainer">
@@ -29,8 +29,10 @@ export default function OrderSummary({ orderSummary }) {
               transformed.map(
                 (item) =>
                   item.title !== 'Total' ?
-                    <div className="order-summary-title orderTracking-para">{item.title}</div>
-                    : <div className="order-summary-title orderTracking-para"><strong>{item.title}</strong></div>
+                    item.title === 'Discount' && item.value > 0 ?
+                      <div className="order-summary-title orderTracking-para">{item.title} <strong style={{paddingLeft:'10px'}}>{item && item.code ? `(${item.code})` : ''}</strong></div>:
+                      <div className="order-summary-title orderTracking-para">{item.title}</div>
+                      : <div className="order-summary-title orderTracking-para mensaTotal">{item.title}</div>
               )
             }
           </div>
@@ -38,8 +40,10 @@ export default function OrderSummary({ orderSummary }) {
             {
               transformed.map(
                 (item) => item.value === "Free"
-                  ? <div className="order-summary-value freeShipping orderTracking-para"> {item.value}</div>
-                  : <div className={`order-summary-value orderTracking-para ${item.title}`}>&#8377; {item.value}</div>
+                  ? <div className="order-summary-value freeShipping mensaOSValue"> {item.value}</div>
+                  : item.title === 'Total' ?
+                  <div className={`order-summary-value mensaOSValue totalValue`}>&#8377; {item.value}</div>:
+                  <div className={`order-summary-value mensaOSValue ${item.title}`}>&#8377; {item.value}</div>
               )
             }
           </div>
