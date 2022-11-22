@@ -228,7 +228,7 @@ const getItems = () => {
       console.error("item qty not found");
     }
     try {
-      let att =  item.children[6].children
+      let att =  item.children[7].children
       for(let attrib of att) {
         attr.push( attrib.innerText)
       }

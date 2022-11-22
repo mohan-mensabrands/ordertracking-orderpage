@@ -49,13 +49,13 @@ Timeline.propTypes = {
   orderData: PropTypes.object,
 };
 
-function Event({ item, eventCount, hideLine, trackingLink }) {
+function Event({ item, eventCount, hideLine }) {
   let eventClass = "timeline-event orderTracking-para-bold " + mapActiveStatus(item.status);
   let dotlineClass = "dot-line " + mapActiveStatus(item.status);
   let style = { display: "none" }
   const redirectToTrackingLink = () => {
-    if (trackingLink && trackingLink !== "" && item.status === 0) {
-      window.open(trackingLink, '_blank')
+    if (item.trackingLink && item.trackingLink !== "" && item.status === 0) {
+      window.open(item.trackingLink, '_blank')
     }
   }
   return (
@@ -67,7 +67,7 @@ function Event({ item, eventCount, hideLine, trackingLink }) {
       <div>
         {mapStatus(item.title, item.dateTime, item.status)}
       </div>
-      {trackingLink !== "" ?
+      {item.trackingLink && item.trackingLink !== "" && item.status === 0 ?
         <div className="arrowSvg"><RightArrow /></div> : <></>
       }
     </div>
