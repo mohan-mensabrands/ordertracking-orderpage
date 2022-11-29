@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./App.css";
 import {
   Addresses,
+  AllEvents,
   HelpModal,
   OrderIdAndBack,
   OrderInfoCard,
@@ -13,7 +14,8 @@ import {
 function App({ orderData }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showHelp, setShowHelp] = useState(false)
+  const [showHelp, setShowHelp] = useState(false);
+  const [showAllEvents, setShowAllEvents] = useState(false);
 
   useEffect(() => {
     if (orderData.ifDelivered) {
@@ -58,6 +60,8 @@ function App({ orderData }) {
     orderData
   ]);
 
+  const toggleAllEvents = () => setShowAllEvents(!showAllEvents)
+
   if (loading) {
     return <div className="orderTracking-loader">Loading...</div>;
   }
@@ -75,6 +79,8 @@ function App({ orderData }) {
               orderData={orderData}
               onClick={() => setShowHelp(!showHelp)}
             />
+            <div className="mensaViewMore" onClick={toggleAllEvents}>{showAllEvents ? 'Close' : 'See All Updates'}</div>
+            {/* {showAllEvents ? <AllEvents orderId={orderData.orderId}/> : <></>} */}
             <hr className="saparator" />
           </>
         );
@@ -86,6 +92,7 @@ function App({ orderData }) {
       <hr className="saparator" />
       <OrderSummary orderSummary={orderData.orderSummary} />
       <HelpModal contactDetails={orderData.contactDetails} show={showHelp} onClose={() => setShowHelp(false)} />
+      <AllEvents orderId={orderData.orderId} show={showAllEvents} onClose={() => setShowAllEvents(false)}/>
     </div>
   );
 }
