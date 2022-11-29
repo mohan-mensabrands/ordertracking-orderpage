@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import res from '../newres.json'
 
 export default function AllEvents({ orderId, show, onClose }) {
+    const [ress, setRess] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const fetchData = useCallback(async() => {
+        const response = await fetch('https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/15163103015868');
+        const data = await response.json();
+        setRess(JSON.parse(data.data.trackingInfoDetail.scans));
+        setLoading(false);
+    }, []); 
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData();
+    }, []);
+
     // call OMS api
     // use memo
     // set loading till fetch 
-    let ress = res.data.scans
-    console.log(ress);
     if (show) {
         document.body.classList.add('mensaModalActive')
     } else {
@@ -23,7 +36,7 @@ export default function AllEvents({ orderId, show, onClose }) {
             </div>
             <div className={show ? 'mensaSubeventContainer' : 'mensaHide'}>
                 <div className='mensaSubeventTimeline'>
-                    {ress.map(
+                    {ress?.map(
                         (event) =>
                             <div className='eventCard'>
                                 <SubEvent
