@@ -16,6 +16,8 @@ function App({ orderData }) {
   const [loading, setLoading] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [showAllEvents, setShowAllEvents] = useState(false);
+  const [allEvents, setAllEvents] = useState([]);
+  const [loadingAllEvents, setLoadingAllEvents] = useState(false);
 
   useEffect(() => {
     if (orderData.ifDelivered) {
@@ -60,7 +62,22 @@ function App({ orderData }) {
     orderData
   ]);
 
-  const toggleAllEvents = () => setShowAllEvents(!showAllEvents)
+  const sortSubEvents = (scans) => {
+    return scans.sort((a, b) => {
+      if (a.date > b.date) return -1
+      return 1
+    })
+  }
+  const toggleAllEvents = () => {
+    setLoadingAllEvents(true)
+    setShowAllEvents(!showAllEvents)
+    console.log('calling')
+    fetch('https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/18466110217136')
+      .then((res) => res.json())
+      .then((res) => setAllEvents(sortSubEvents(JSON.parse(res.data.trackingInfoDetail.scans))))
+      .then(() => setLoadingAllEvents(false))
+      .catch(() => setLoadingAllEvents(false))
+  }
 
   if (loading) {
     return <div className="orderTracking-loader">Loading...</div>;
@@ -80,19 +97,18 @@ function App({ orderData }) {
               onClick={() => setShowHelp(!showHelp)}
             />
             <div className="mensaViewMore" onClick={toggleAllEvents}>{showAllEvents ? 'Close' : 'See All Updates'}</div>
-            {/* {showAllEvents ? <AllEvents orderId={orderData.orderId}/> : <></>} */}
             <hr className="saparator" />
           </>
         );
       })}
-      
+
       <PaymentCard paymentMode={orderData.financialStatus === 'paid' ? 'Paid' : 'Pay on Delivery'} />
       <hr className="saparator" />
       <Addresses addressData={orderData.addresses} />
       <hr className="saparator" />
       <OrderSummary orderSummary={orderData.orderSummary} />
       <HelpModal contactDetails={orderData.contactDetails} show={showHelp} onClose={() => setShowHelp(false)} />
-      <AllEvents orderId={orderData.orderId} show={showAllEvents} onClose={() => setShowAllEvents(false)}/>
+      <AllEvents allEvents={allEvents} loading={loadingAllEvents} show={showAllEvents} onClose={() => setShowAllEvents(false)} />
     </div>
   );
 }

@@ -1,26 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React from 'react';
+import { FallbackSvg } from '../svg';
 
-import res from '../newres.json'
 
-export default function AllEvents({ orderId, show, onClose }) {
-    const [ress, setRess] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const fetchData = useCallback(async() => {
-        const response = await fetch('https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/15163103015868');
-        const data = await response.json();
-        setRess(JSON.parse(data.data.trackingInfoDetail.scans));
-        setLoading(false);
-    }, []); 
-
-    useEffect(() => {
-        setLoading(true);
-        fetchData();
-    }, []);
-
-    // call OMS api
-    // use memo
-    // set loading till fetch 
+export default function AllEvents({ allEvents, loading, show, onClose }) { 
     if (show) {
         document.body.classList.add('mensaModalActive')
     } else {
@@ -35,8 +17,10 @@ export default function AllEvents({ orderId, show, onClose }) {
             </svg>
             </div>
             <div className={show ? 'mensaSubeventContainer' : 'mensaHide'}>
+                {loading ? <div>loading</div>:
+                allEvents.length < 1 ? <Fallback/>:
                 <div className='mensaSubeventTimeline'>
-                    {ress?.map(
+                    {allEvents?.map(
                         (event) =>
                             <div className='eventCard'>
                                 <SubEvent
@@ -46,7 +30,7 @@ export default function AllEvents({ orderId, show, onClose }) {
                                 ></SubEvent>
                             </div>
                     )}
-                </div>
+                </div>}
             </div>
         </div>
     )
@@ -55,16 +39,12 @@ export default function AllEvents({ orderId, show, onClose }) {
 const SubEvent = ({ date, name, location, time }) => {
     return (
         <>
-            {/* <div className='dot-line'>
-                <div className="dot"> </div>
-                <div className="line"> </div>
-            </div> */}
             <div className="mensaSubeventALDContainer">
                 <div className="mensaSubeventName">{name}</div>
                 <div className="mensaSubeventLDContainer">
-                    <div className="mensaSubeventLocation">{location}</div>
                     <div className="mensaSubeventDate">{date}</div>
-                    <div className="mensaSubeventTime">{time}</div>
+                    <div className="mensaSubeventLocation">{location}</div>
+                    {/* <div className="mensaSubeventTime">{time}</div> */}
                 </div>
             </div>
         </>
@@ -72,6 +52,16 @@ const SubEvent = ({ date, name, location, time }) => {
 }
 
 const dateFormat = (isoDate) => {
-    var options = { weekday: 'long', month: 'short', day: 'numeric' };
+    var options = { weekday: 'short', month: 'short', day: 'numeric' };
     return isoDate.toLocaleDateString("en-US", options)
+}
+
+const Fallback = () => {
+    return(
+        <div className='mensaFallbackPage'>
+            <FallbackSvg/>
+            <div className="mensaFallback">Hey!, we know what you are looking for</div>
+            <div className="mensaFallbackSecondary">Come back in sometime for this information</div>
+        </div>
+    )
 }
