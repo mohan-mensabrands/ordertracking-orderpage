@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <!--
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -22,92 +24,18 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>React App</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>React App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <!-- <div class="customer order" style="padding:0; margin-top:10px">
-    <div class="orderId-back-button" style="display:none">
-      <a id="orderTrackingBackButton" href="/account"> 4269804519559 </a>
-    </div>
-    <div id="orderData" style="display:none">
-      <div name="ifCancelled">false</div>
-      <div name="fullfillmentStatus">unfulfilled</div>
-      <div name="orderId">4269804519559</div>
-      <div name="orderDate">October 14, 2022</div>
-      <div name="today">October 14, 2022</div>
-      <div name="financialStatus">paid</div>
-      <div name="addresses">
-        <div name="shippingAddress">{"first_name":"mohan","address1":"asdfasf","phone":"+91 1234 123 412","city":"bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"g","address2":"adsfasdf","company":"mensa","latitude":null,"longitude":null,"name":"mohan g","country_code":"IN","province_code":"KA"}</div>
-        <div name="billingAddress">null</div>
-      </div>
-      <div name="orderSummary">
-        <div name="total">499</div>
-        <div name="discount">0</div>
-        <div name="subTotal">499</div>
-        <div name="shippingCharges">0</div>
-        <div name="tax">21</div>
-      </div>
-      <div name="lineItems"><div name="11059970998407">
-          <div name="itemId">5199594291335</div>
-          <div name="itemTitle">German Silver Oxidised Ghungroo Jewellery Set With Ring &amp; Nosepin</div>
-          <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10301.M_120X90.jpg?v=1659080758"></div>
-          <div name="itemPrice">
-            <div name="totalPrice">499.00</div>
-            <div name="finalPrice">499.00</div>
-          </div>
-          <div name="quantity">Qty: 1</div>
-          <ul class="orderAttributes">
-            <li>Size: One Size</li>
-          </ul>
-          
-        </div></div>
-    </div>
-    <div id="order-tracking"></div>
-    <link href="//cdn.shopify.com/s/files/1/0329/7178/4327/t/50/assets/mensa-order.css?v=40254307163242931471665750636" rel="stylesheet" type="text/css" media="all">
-    <script src="//cdn.shopify.com/s/files/1/0329/7178/4327/t/50/assets/mensa-order.js?v=141308422920964496711665751921" type="text/javascript"></script>
-  </div> -->
-  <!-- <div id="orderData" style="display:none">
-    <div name="ifCancelled">true</div>
-    <div name="fullfillmentStatus">unfulfilled</div>
-    <div name="orderId">4272827334791</div>
-    <div name="orderDate">October 17, 2022</div>
-    <div name="today">October 20, 2022</div>
-    <div name="financialStatus">paid</div>
-    <div name="addresses">
-      <div name="shippingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
-      <div name="billingAddress">{"first_name":"testing","address1":"ban","phone":"+91 84331 48434","city":"Bengaluru","zip":"123456","province":"Karnataka","country":"India","last_name":"mensa","address2":"do not dispatch for testing purpose","company":"mensa","latitude":null,"longitude":null,"name":"testing mensa","country_code":"IN","province_code":"KA"}</div>
-    </div>
-    <div name="orderSummary">
-      <div name="total">1499</div>
-      <div name="discount">0</div>
-      <div name="subTotal">1499</div>
-      <div name="shippingCharges">0</div>
-      <div name="tax">64</div>
-    </div>
-    <div name="lineItems"><div name="11066391199879">
-        <div name="itemId">4756009353351</div>
-        <div name="itemTitle">Pink Ruby Gold Plated Floral Jewellery Set</div>
-        <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/NL-PR-10191_1_120X90.jpg?v=1597552773"></div>
-        <div name="itemPrice">
-          <div name="totalPrice">1,499.00</div>
-          <div name="finalPrice">1,499.00</div>
-        </div>
-        <div name="quantity">Qty: 1</div>
-<!--         <div name='size'>One Size</div>
-        <div name='color'></div> -->
-  <!-- <ul class="orderAttributes">
-                <li>Size: One Size</li>
-              </ul>
-        
-      </div></div>
-  </div> -->
-  <!-- <div id="orderData" style="display:none">
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <div id="orderData" style="display:none">
     <div name="ifCancelled">false</div>
     <div name="fullfillmentStatus">unfulfilled</div>
     <div name="orderId">4276646051975</div>
@@ -166,7 +94,7 @@
 
       </div></div>
   </div> -->
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
     <div name="ifCancelled">false</div>
     <div name="fullfillmentStatus">unfulfilled</div>
     <div name="orderId">4282427637895</div>
@@ -201,7 +129,7 @@
         
       </div></div>
   </div> -->
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
     <div name="ifCancelled">true</div>
     <div name="fullfillmentStatus">unfulfilled</div>
     <div name="orderId">4282427637895</div>
@@ -237,7 +165,7 @@
 
       </div></div>
   </div> -->
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
     <div name="ifCancelled">false</div>
     <div name="fullfillmentStatus">unfulfilled</div>
     <div name="orderId">4282485047431</div>
@@ -285,8 +213,7 @@
       </div></div>
   </div> -->
 
-
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
             <div name="ifCancelled">false</div>
         <div name="fullfillmentStatus">unfulfilled</div>
         <div name="orderId">4282484523143</div>
@@ -322,7 +249,7 @@
             
           </div></div>
       </div> -->
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
         <div name="ifCancelled">false</div>
     <div name="fullfillmentStatus">unfulfilled</div>
     <div name="orderId">4512042319930</div>
@@ -359,7 +286,7 @@
         
       </div></div>
   </div> -->
-  <!-- <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
             <div name="ifCancelled">false</div>
         <div name="fullfillmentStatus">unfulfilled</div>
         <div name="orderId">4299950751879</div>
@@ -421,7 +348,7 @@
             <div name="quantity">Qty: 1</div>
           </div></div>
       </div> -->
-      <div id="orderData" style="display:none">
+    <!-- <div id="orderData" style="display:none">
         <div name="mensaContactDetails">
           <div name="whatsapp"></div>
           <div name="email">care@ishinfashions.com</div>
@@ -429,7 +356,7 @@
         </div>
         <div name="ifCancelled">false</div>
         <div name="fullfillmentStatus">fulfilled</div>
-        <div name="orderId">5015767351536</div>
+        <div name="orderId">4322051719303</div>
         <div name="orderDate">November 22, 2022</div>
         <div name="today">November 23, 2022</div>
         <div name="financialStatus">pending</div>
@@ -448,9 +375,10 @@
             <div name="discountCode">ISHINNEW10</div>
           
         </div>
-        <div name="lineItems"><div name="12681301491952">
+        <div name="lineItems"><div name="11173237194887">
               <div name="trackingLink">https://www.delhivery.com/track/package/18466110205645</div>
-              <div name="itemId">12681301491952</div>
+              
+              <div name="itemId">11173237194887</div>
               <div name="itemTitle">Rangrasia- Bandhani Anarkali</div>
               <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0222/9223/4304/products/Kpram-6072_120X90.jpg?v=1609997653"></div>
               <a name="productLink" href="/products/ishin-womens-rayon-red-bandhani-print-embellished-anarkali-kurta-kpram-6072"></a>
@@ -463,10 +391,155 @@
                 <ul class="orderAttributes">
                   <li>SIZE: S</li><li>COLOR: Red</li><li>MATERIAL: Viscose Rayon</li>
                 </ul>
-              
+              <div name="trackingNumber">15163103015877</div>
             </div></div>
+      </div> -->
+    <!-- <div id="orderData" style="display: none">
+      <div name="mensaContactDetails">
+        <div name="whatsapp">+919311749215</div>
+        <div name="email">support@priyaasi.com</div>
+        <div name="phone">+919311749215</div>
       </div>
-  <div id="order-tracking"></div>
-</body>
+      <div name="ifCancelled">false</div>
+      <div name="fullfillmentStatus">unfulfilled</div>
+      <div name="orderId">5026013806832</div>
+      <div name="orderDate">November 10, 2022</div>
+      <div name="today">December 03, 2022</div>
+      <div name="financialStatus">voided</div>
+      <div name="addresses">
+        <div name="shippingAddress">
+          {"first_name":"Do Not","address1":"ban","phone":"+91 84331
+          48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do
+          not dispatch for testing
+          purpose","company":"mensa","latitude":null,"longitude":null,"name":"Do
+          Not Dispatch","country_code":"IN","province_code":"KA"}
+        </div>
+        <div name="billingAddress">
+          {"first_name":"Do Not","address1":"ban","phone":"+91 84331
+          48434","city":"Bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"Dispatch","address2":"do
+          not dispatch for testing
+          purpose","company":"mensa","latitude":12.911862,"longitude":77.6445923,"name":"Do
+          Not Dispatch","country_code":"IN","province_code":"KA"}
+        </div>
+      </div>
+      <div name="orderSummary">
+        <div name="total">1568</div>
+        <div name="discount">0</div>
+        <div name="subTotal">1568</div>
+        <div name="shippingCharges">0</div>
+        <div name="tax">67</div>
 
+        <div name="taxValues">
+          <div name="taxTitle">CGST</div>
+          <div name="taxRate">1.5</div>
+          <div name="taxVal">22.51</div>
+        </div>
+
+        <div name="taxValues">
+          <div name="taxTitle">SGST</div>
+          <div name="taxRate">3.0</div>
+          <div name="taxVal">45.01</div>
+        </div>
+      </div>
+      <div name="lineItems">
+        <div name="12703487918320">
+          <div name="trackingLink">
+            https://shiprocket.co/tracking/18564910113820
+          </div>
+          <div name="itemId">12703487918320</div>
+          <div name="itemTitle">
+            Designer Stone Studded Gold Plated Maroon Colour Silk Threaded
+            Latest Stylish Traditional Bangles For Women And Girls Set Of 8
+          </div>
+          <div name="itemImage">
+            <img
+              src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BA-PR-40069-2-6_1_e7986825-3768-4f28-b964-2b1e476e80f3_120X90.jpg?v=1597720426"
+            />
+          </div>
+          <a
+            name="productLink"
+            href="/products/designer-stone-studded-gold-plated-maroon-colour-silk-threaded-latest-stylish-traditional-bangles-for-women-and-girls-set-of-8-ba-pr-40069-2-4"
+          ></a>
+          <div name="itemPrice">
+            <div name="totalPrice">369.00</div>
+            <div name="pricePerUnit">369.00</div>
+            <div name="finalPrice">369.00</div>
+          </div>
+          <div name="quantity">Qty: 1</div>
+          <ul class="orderAttributes">
+            <li>Size: 2.4</li>
+          </ul>
+
+          <div name="trackingNumber">18564910113820</div>
+        </div>
+        <div name="11124512751751">
+          <div name="trackingLink"></div>
+          <div name="itemId">11124512751751</div>
+          <div name="itemTitle">Handcrafted Floral Red and Green Bracelet</div>
+          <div name="itemImage">
+            <img
+              src="//cdn.shopify.com/s/files/1/0329/7178/4327/products/BR-PR-20138_1_120X90.jpg?v=1605947238"
+            />
+          </div>
+          <a
+            name="productLink"
+            href="/products/handcrafted-floral-red-and-green-bracelet-br-pr-20138"
+          ></a>
+          <div name="itemPrice">
+            <div name="totalPrice">1,199.00</div>
+            <div name="pricePerUnit">1,199.00</div>
+            <div name="finalPrice">1,199.00</div>
+          </div>
+          <div name="quantity">Qty: 1</div>
+          <div name="trackingNumber"></div>
+        </div>
+      </div>
+    </div> -->
+    <div id="orderData" style="display:none">
+      <div name="mensaContactDetails">
+        <div name="whatsapp"></div>
+        <div name="email">care@dennislingo.com</div>
+        <div name="phone">+919611719302</div>
+      </div>
+      <div name="ifCancelled">false</div>
+      <div name="fullfillmentStatus">fulfilled</div>
+      <div name="orderId">5006021492963</div>
+      <div name="orderName">#DL14692</div>
+      <div name="orderDate">November 21, 2022</div>
+      <div name="today">February 10, 2023</div>
+      <div name="financialStatus">pending</div>
+      <div name="addresses">
+        <div name="shippingAddress">{"first_name":"test","address1":"do not dispatch","phone":"84331 48434","city":"bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"testing only","company":null,"latitude":null,"longitude":null,"name":"test mensa","country_code":"IN","province_code":"KA"}</div>
+        <div name="billingAddress">{"first_name":"test","address1":"do not dispatch","phone":"84331 48434","city":"bengaluru","zip":"560102","province":"Karnataka","country":"India","last_name":"mensa","address2":"testing only","company":null,"latitude":null,"longitude":null,"name":"test mensa","country_code":"IN","province_code":"KA"}</div>
+      </div>
+      <div name="orderSummary">
+        <div name="total">900</div>
+        <div name="discount">0</div>
+        <div name="subTotal">850</div>
+        <div name="shippingCharges">50</div>
+        <div name="tax">0</div>
+        
+        
+      </div>
+      <div name="lineItems"><div name="12619041669347">
+            <div name="trackingLink">https://www.delhivery.com/track/package/18466110205026</div>
+            <div name="itemId">12619041669347</div>
+            <div name="itemTitle">The Noah Shirt (DARKBLUEOMBRE)</div>
+            <div name="itemImage"><img src="//cdn.shopify.com/s/files/1/0613/8304/9443/products/C503_D_20_281_29_5f20b26a-6038-447a-9213-0e447461c665_120X90.jpg?v=1663891126"></div>
+            <a name="productLink" href="/products/men-denim-slim-fit-cotton-casual-shirt-with-mandarin-collar-c503-darkblueombre"></a>
+            <div name="itemPrice">
+              <div name="totalPrice">850</div>
+              <div name="pricePerUnit">850</div>
+              <div name="finalPrice">850</div>
+            </div>
+            <div name="quantity">Qty: 1</div>
+              <ul class="orderAttributes">
+                <li>COLOR: DARKBLUEOMBRE</li><li>SIZE: M</li>
+              </ul>
+            
+            <div name="trackingNumber">18466110205026</div>
+          </div></div>
+    </div>
+    <div id="order-tracking"></div>
+  </body>
 </html>

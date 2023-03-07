@@ -11,6 +11,8 @@ import {
   PaymentCard,
 } from "./Components";
 
+// import evRes from './response.json'
+
 function App({ orderData }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,6 +56,7 @@ function App({ orderData }) {
         console.error('error fetching api, please check network');
         setLoading(false);
       }
+      // setEvents(evRes.data)
 
     };
     fetchData();
@@ -68,11 +71,11 @@ function App({ orderData }) {
       return 1
     })
   }
-  const toggleAllEvents = () => {
+  const toggleAllEvents = (trackingNumber) => {
+    console.log('calling TRN', trackingNumber)
     setLoadingAllEvents(true)
     setShowAllEvents(!showAllEvents)
-    console.log('calling')
-    fetch('https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/18466110217136')
+    fetch(`https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/${trackingNumber}`)
       .then((res) => res.json())
       .then((res) => setAllEvents(sortSubEvents(JSON.parse(res.data.trackingInfoDetail.scans))))
       .then(() => setLoadingAllEvents(false))
@@ -85,7 +88,7 @@ function App({ orderData }) {
 
   return (
     <div className="mensaOrderPage">
-      <OrderIdAndBack orderId={orderData.orderId} onClick={() => setShowHelp(!showHelp)} />
+      <OrderIdAndBack orderId={orderData.orderName} onClick={() => setShowHelp(!showHelp)} />
       <hr className="saparator-1px" />
       {orderData.lineItems.map((sku) => {
         return (
@@ -96,7 +99,12 @@ function App({ orderData }) {
               orderData={orderData}
               onClick={() => setShowHelp(!showHelp)}
             />
-            <div className="mensaViewMore" onClick={toggleAllEvents}>{showAllEvents ? 'Close' : 'See All Updates'}</div>
+            <div 
+              className="mensaViewMore" 
+              id={'seeAllUpdates'+sku.itemId}
+              onClick={() => toggleAllEvents(sku.trackingNumber)} 
+              style={!sku.trackingNumber ? {display:'none'} : {}}
+            >{showAllEvents ? 'Close' : 'See All Updates'}</div>
             <hr className="saparator" />
           </>
         );

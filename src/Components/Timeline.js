@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { RightArrow } from "../svg";
 
 export default function Timeline({ events, orderData }) {
+  // console.log('evets per sku', events);
   if (orderData.ifCancelled || events.status === 'CANCELLED') {
     return (
       <div className="timeline orderTrackingCard">
@@ -28,6 +29,7 @@ export default function Timeline({ events, orderData }) {
     );
   }
   if (events[0].title === 'Delivered' && events[0].status === 0 && events[0].dateTime) {
+    // document.getElementById(`seeAllUpdates${events.itemId}`).style.display = 'none'
     return (
       <div className="timeline orderTrackingCard">
         <Event item={events[0]} eventCount={events.length} hideLine={true} />

@@ -790,12 +790,12 @@ font-weight:900;
 
 .mensaSubeventLDContainer {
   display: flex;
-  display: flex;
   gap: 16px;
   padding: 8px 20px 8px 0;
   font-size: 12px;
   opacity: .9;
   color: grey;
+  width: max-content;
 }
 
 .eventCard {
@@ -828,8 +828,6 @@ font-weight:900;
 .eventCard>.dot-line>.line {
   border: 1px solid grey;
 }
-
-.mensaSubeventContainer {}
 
 .mensaSubeventALDContainer {}
 
@@ -873,6 +871,7 @@ font-weight:900;
   max-width: 700px;
   animation: shipping-anime .3s linear;
   overflow: scroll;
+  overflow-x: hidden;
 }
 .mensaSubeventContainer::-webkit-scrollbar {
   position: relative;
