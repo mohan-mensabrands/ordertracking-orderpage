@@ -71,7 +71,9 @@ function Event({ item, eventCount, hideLine, onClick }) {
   //   }
   // }
   return (
-    <div className={eventClass} onClick={()=> onClick()}>
+    <div className={eventClass} onClick={() => {
+      if(item.status === 0) onClick()
+    } }>
       <div className={dotlineClass}>
         <div className="dot"> </div>
         {!hideLine ? <div className="line" style={eventCount === 1 ? style : {}}> </div> : <></>}
@@ -79,7 +81,9 @@ function Event({ item, eventCount, hideLine, onClick }) {
       <div>
         {mapStatus(item.title, item.dateTime, item.status)}
       </div>
-      {item.trackingLink && item.trackingLink !== "" && item.status === 0 ?
+      {
+      // item.trackingLink && item.trackingLink !== "" && 
+      item.status === 0 ?
         <div className="arrowSvg"><RightArrow /></div> : <></>
       }
     </div>

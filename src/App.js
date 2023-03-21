@@ -97,7 +97,7 @@ function App({ orderData }) {
               events={events}
               sku={sku}
               orderData={orderData}
-              onClick={() => setShowAllEvents(!showAllEvents)}
+              onClick={() => toggleAllEvents(sku.trackingNumber)}
             />
             {/* <div 
               className="mensaViewMore" 
