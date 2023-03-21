@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { RightArrow } from "../svg";
 
-export default function Timeline({ events, orderData, onClick }) {
+export default function Timeline({ events, orderData, onClick, showArrow }) {
   // console.log('evets per sku', events);
-  if (orderData.ifCancelled || events.status === 'CANCELLED') {
+  if (orderData.ifCancelled || events.status === "CANCELLED") {
     return (
       <div className="timeline orderTrackingCard">
-        <div className='timeline-event orderTracking-para-bold CANCELLED' >
-          <div className='dot-line CANCELLED'>
+        <div className="timeline-event orderTracking-para-bold CANCELLED">
+          <div className="dot-line CANCELLED">
             <div className="dot"> </div>
           </div>
           Cancelled
@@ -28,28 +28,34 @@ export default function Timeline({ events, orderData, onClick }) {
       </div>
     );
   }
-  if (events[0].title === 'Delivered' && events[0].status === 0 && events[0].dateTime) {
+  if (
+    events[0].title === "Delivered" &&
+    events[0].status === 0 &&
+    events[0].dateTime
+  ) {
     // document.getElementById(`seeAllUpdates${events.itemId}`).style.display = 'none'
     return (
       <div className="timeline orderTrackingCard">
-        <Event 
-          item={events[0]} 
-          eventCount={events.length} 
-          hideLine={true} 
-          onClick={onClick} 
+        <Event
+          item={events[0]}
+          eventCount={events.length}
+          hideLine={true}
+          onClick={onClick}
+          showArrow={showArrow}
         />
       </div>
-    )
+    );
   }
 
   return (
     <div className="timeline orderTrackingCard">
       {events.map((item) => (
-        <Event 
+        <Event
           item={item}
           eventCount={events.length}
           trackingLink={events.trackingLink}
           onClick={onClick}
+          showArrow={showArrow}
         />
       ))}
     </div>
@@ -61,42 +67,55 @@ Timeline.propTypes = {
   orderData: PropTypes.object,
 };
 
-function Event({ item, eventCount, hideLine, onClick }) {
-  let eventClass = "timeline-event orderTracking-para-bold " + mapActiveStatus(item.status);
+function Event({ item, eventCount, hideLine, onClick, showArrow }) {
+  let eventClass =
+    "timeline-event orderTracking-para-bold " + mapActiveStatus(item.status);
   let dotlineClass = "dot-line " + mapActiveStatus(item.status);
-  let style = { display: "none" }
+  let style = { display: "none" };
   // const redirectToTrackingLink = () => {
   //   if (item.trackingLink && item.trackingLink !== "" && item.status === 0) {
   //     window.open(item.trackingLink, '_blank')
   //   }
   // }
   return (
-    <div className={eventClass} onClick={() => {
-      if(item.status === 0) onClick()
-    } }>
+    <div
+      className={eventClass}
+      onClick={() => {
+        if (item.status === 0) onClick();
+      }}
+    >
       <div className={dotlineClass}>
         <div className="dot"> </div>
-        {!hideLine ? <div className="line" style={eventCount === 1 ? style : {}}> </div> : <></>}
+        {!hideLine ? (
+          <div className="line" style={eventCount === 1 ? style : {}}>
+            {" "}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-      <div>
-        {mapStatus(item.title, item.dateTime, item.status)}
-      </div>
-      {
-      // item.trackingLink && item.trackingLink !== "" && 
-      item.status === 0 ?
-        <div className="arrowSvg"><RightArrow /></div> : <></>
-      }
+      <div>{mapStatus(item.title, item.dateTime, item.status)}</div>
+      {showArrow && item.status === 0 ? (
+        <div className="arrowSvg">
+          <RightArrow />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
 
 const mapStatus = (title, eventDate, status) => {
-  var options = { month: 'short', day: 'numeric' };
+  var options = { month: "short", day: "numeric" };
   let t = new Date();
-  let ed = new Date(eventDate.replace(" ", 'T'))
+  let ed = new Date(eventDate.replace(" ", "T"));
   // console.log('ed-->', ed, 'today-->', t);
-  let dateVal = ed.toLocaleDateString('en-us', options)
-  let today = ed.getDate() === t.getDate() && ed.getMonth() === t.getMonth() && ed.getFullYear() === t.getFullYear();
+  let dateVal = ed.toLocaleDateString("en-us", options);
+  let today =
+    ed.getDate() === t.getDate() &&
+    ed.getMonth() === t.getMonth() &&
+    ed.getFullYear() === t.getFullYear();
   const getFuture = (ed, t) => {
     if (ed.getFullYear() < t.getFullYear()) return false;
     if (ed.getFullYear() > t.getFullYear()) return true;
@@ -104,31 +123,31 @@ const mapStatus = (title, eventDate, status) => {
     if (ed.getMonth() > t.getMonth()) return true;
     if (ed.getDate() <= t.getDate()) return false;
     return true;
-  }
+  };
   let future = getFuture(ed, t);
-  let inProgress = status === 0
-  if (title === 'Created') {
-    if (today) return 'Placed Today'
-    return `Placed on ${dateVal}`
+  let inProgress = status === 0;
+  if (title === "Created") {
+    if (today) return "Placed Today";
+    return `Placed on ${dateVal}`;
   }
-  if (title === 'Dispatched') return 'Shipped'
-  if (title === 'Delivered') {
+  if (title === "Dispatched") return "Shipped";
+  if (title === "Delivered") {
     if (inProgress) {
       if (today) {
-        return 'Delivered Today'
+        return "Delivered Today";
       }
-      if (future) return `Arriving on ${dateVal}`
-      return `Delivered on ${dateVal}`
+      if (future) return `Arriving on ${dateVal}`;
+      return `Delivered on ${dateVal}`;
     }
     if (today) {
-      return 'Arriving Today'
+      return "Arriving Today";
     }
-    return `Arriving on ${dateVal}`
+    return `Arriving on ${dateVal}`;
   }
   return title;
-}
+};
 
 const mapActiveStatus = (status) => {
-  let mapping = { 1: 'PENDING', 0: 'IN_PROGRESS', '-1': 'COMPLETE' }
-  return mapping[status]
-}
+  let mapping = { 1: "PENDING", 0: "IN_PROGRESS", "-1": "COMPLETE" };
+  return mapping[status];
+};

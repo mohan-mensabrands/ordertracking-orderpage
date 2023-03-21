@@ -97,7 +97,10 @@ function App({ orderData }) {
               events={events}
               sku={sku}
               orderData={orderData}
-              onClick={() => toggleAllEvents(sku.trackingNumber)}
+              onClick={() => { 
+                if(sku.trackingNumber && sku.trackingNumber.trim() !== '') toggleAllEvents(sku.trackingNumber)
+              }}
+              showArrow={sku.trackingNumber && sku.trackingNumber.trim() !== ''}
             />
             {/* <div 
               className="mensaViewMore" 

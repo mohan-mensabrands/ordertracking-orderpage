@@ -6,7 +6,8 @@ export default function OrderInfoCard({
   events,
   sku,
   orderData,
-  onClick
+  onClick,
+  showArrow
 }) {
   let discount = Math.round(
     ((sku.itemPrice.totalPrice.replace(',', '') - sku.itemPrice.finalPrice.replace(',', '')) * 100) /
@@ -49,13 +50,14 @@ export default function OrderInfoCard({
         sku={sku}
         orderData={orderData}
         onClick={onClick}
+        showArrow={showArrow}
       />
       {/* <CancelOrder onClick={onClick}/> */}
     </>
   );
 }
 
-const CreateTimeline = ({ events, sku, orderData, onClick }) => {
+const CreateTimeline = ({ events, sku, orderData, onClick, showArrow }) => {
   // console.log('trackingLink', sku.trackingLink);
   // console.log("all events", events);
   let itemsMap = new Map();
@@ -73,6 +75,7 @@ const CreateTimeline = ({ events, sku, orderData, onClick }) => {
       <Timeline
         events={[]}
         orderData={orderData}
+        showArrow={showArrow}
       />
     );
   }
@@ -104,6 +107,7 @@ const CreateTimeline = ({ events, sku, orderData, onClick }) => {
         events={eventsProp}
         orderData={orderData}
         onClick={onClick}
+        showArrow={showArrow}
       />
     );
   }
@@ -112,6 +116,7 @@ const CreateTimeline = ({ events, sku, orderData, onClick }) => {
       events={[{ index: 0, title: 'Created', status: 0, dateTime: orderData.orderDate, trackingLink: sku.trackingLink }]}
       orderData={orderData}
       onClick={onClick}
+      showArrow={showArrow}
     />
   );
 };
