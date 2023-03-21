@@ -21,7 +21,7 @@ export default function OrderInfoCard({
             <div className="product-name orderTracking-para">{sku.title}</div>
             <div className="product-size">
               {sku.attributes.map((att) =>
-              <div className="titleValuePair">{att}</div>
+               <div className="titleValuePair">{att}</div>
               )}
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function OrderInfoCard({
             ) : (
               <></>
             )}
-            {sku.attributes[0].split(':')[1] > 1 ? <div className="mensaQtyXPrice">( &#8377;{` ${sku.itemPrice.pricePerUnit} X ${sku.attributes[0].split(':')[1]} )`}</div>:<></>}
+            {sku.attributes[0].split(':')[1] > 1 ? <div className="mensaQtyXPrice">( &#8377;{` ${sku.itemPrice.pricePerUnit} X ${sku.attributes[0].split(':')[1]} )`}</div> : <></>}
           </div>
         </div>
       </div>
@@ -48,15 +48,21 @@ export default function OrderInfoCard({
         events={events}
         sku={sku}
         orderData={orderData}
+        onClick={onClick}
       />
       {/* <CancelOrder onClick={onClick}/> */}
     </>
   );
 }
 
-const CreateTimeline = ({ events, sku, orderData }) => {
+const CreateTimeline = ({ events, sku, orderData, onClick }) => {
   // console.log('trackingLink', sku.trackingLink);
-  let returnIndex = -1;
+  // console.log("all events", events);
+  let itemsMap = new Map();
+  for (let index in events) {
+    itemsMap.set(events[index].itemId.split('-')[0], events[index])
+  }
+  // let returnIndex = -1;
   let eventsProp = []
   const sortf = (a, b) => {
     if (a.index > b.index) return -1
@@ -70,28 +76,42 @@ const CreateTimeline = ({ events, sku, orderData }) => {
       />
     );
   }
-  if (events && events.length > 0 && sku && sku.itemId) {
-    Object.keys(events).forEach(function (key, index) {
-      if (events[key].itemId.split('-')[0] === sku.itemId) {
-        returnIndex = index;
-        eventsProp = events[key].events.sort(sortf);
-        eventsProp.status = events[key].status;
-        eventsProp.trackingLink = sku.trackingLink;
-      }
-    });
-  }
-  if (returnIndex > -1) {
+  // if (events && events.length > 0 && sku && sku.itemId) {
+  //   Object.keys(events).forEach(function (key, index) {
+  //     if (events[key].itemId.split('-')[0] === sku.itemId) {
+  //       returnIndex = index;
+  //       eventsProp = events[key].events.sort(sortf);
+  //       eventsProp.status = events[key].status;
+  //       eventsProp.trackingLink = sku.trackingLink;
+  //     }
+  //   });
+  // }
+  // if (returnIndex > -1) {
+  //   return (
+  //     <Timeline
+  //       events={eventsProp}
+  //       orderData={orderData}
+  //     />
+  //   );
+  // }
+  if (itemsMap.has(sku.itemId)) {
+    eventsProp = itemsMap.get(sku.itemId).events.sort(sortf);
+    eventsProp.status = itemsMap.get(sku.itemId).status;
+    eventsProp.trackingLink = sku.trackingLink;
+    eventsProp.itemId = sku.itemId
     return (
       <Timeline
         events={eventsProp}
         orderData={orderData}
+        onClick={onClick}
       />
     );
   }
   return (
     <Timeline
-      events={[{index:0, title:'Created', status:0, dateTime: orderData.orderDate, trackingLink: sku.trackingLink}]}
+      events={[{ index: 0, title: 'Created', status: 0, dateTime: orderData.orderDate, trackingLink: sku.trackingLink }]}
       orderData={orderData}
+      onClick={onClick}
     />
   );
 };

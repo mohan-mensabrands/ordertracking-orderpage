@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./App.css";
 import {
   Addresses,
+  AllEvents,
   HelpModal,
   OrderIdAndBack,
   OrderInfoCard,
@@ -10,10 +11,15 @@ import {
   PaymentCard,
 } from "./Components";
 
+// import evRes from './response.json'
+
 function App({ orderData }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showHelp, setShowHelp] = useState(false)
+  const [showHelp, setShowHelp] = useState(false);
+  const [showAllEvents, setShowAllEvents] = useState(false);
+  const [allEvents, setAllEvents] = useState([]);
+  const [loadingAllEvents, setLoadingAllEvents] = useState(false);
 
   useEffect(() => {
     if (orderData.ifDelivered) {
@@ -50,6 +56,7 @@ function App({ orderData }) {
         console.error('error fetching api, please check network');
         setLoading(false);
       }
+      // setEvents(evRes.data)
 
     };
     fetchData();
@@ -58,13 +65,30 @@ function App({ orderData }) {
     orderData
   ]);
 
+  const sortSubEvents = (scans) => {
+    return scans.sort((a, b) => {
+      if (a.date > b.date) return -1
+      return 1
+    })
+  }
+  const toggleAllEvents = (trackingNumber) => {
+    console.log('calling TRN', trackingNumber)
+    setLoadingAllEvents(true)
+    setShowAllEvents(!showAllEvents)
+    fetch(`https://0wc7s8r4h7.execute-api.ap-south-1.amazonaws.com/api/v1/tracking/info/${trackingNumber}`)
+      .then((res) => res.json())
+      .then((res) => setAllEvents(sortSubEvents(JSON.parse(res.data.trackingInfoDetail.scans))))
+      .then(() => setLoadingAllEvents(false))
+      .catch(() => setLoadingAllEvents(false))
+  }
+
   if (loading) {
     return <div className="orderTracking-loader">Loading...</div>;
   }
 
   return (
     <div className="mensaOrderPage">
-      <OrderIdAndBack orderId={orderData.orderId} onClick={() => setShowHelp(!showHelp)} />
+      <OrderIdAndBack orderId={orderData.orderName} onClick={() => setShowHelp(!showHelp)} />
       <hr className="saparator-1px" />
       {orderData.lineItems.map((sku) => {
         return (
@@ -73,19 +97,26 @@ function App({ orderData }) {
               events={events}
               sku={sku}
               orderData={orderData}
-              onClick={() => setShowHelp(!showHelp)}
+              onClick={() => setShowAllEvents(!showAllEvents)}
             />
+            {/* <div 
+              className="mensaViewMore" 
+              id={'seeAllUpdates'+sku.itemId}
+              onClick={() => toggleAllEvents(sku.trackingNumber)} 
+              style={!sku.trackingNumber ? {display:'none'} : {}}
+            >{showAllEvents ? 'Close' : 'See All Updates'}</div> */}
             <hr className="saparator" />
           </>
         );
       })}
-      
+
       <PaymentCard paymentMode={orderData.financialStatus === 'paid' ? 'Paid' : 'Pay on Delivery'} />
       <hr className="saparator" />
       <Addresses addressData={orderData.addresses} />
       <hr className="saparator" />
       <OrderSummary orderSummary={orderData.orderSummary} />
       <HelpModal contactDetails={orderData.contactDetails} show={showHelp} onClose={() => setShowHelp(false)} />
+      <AllEvents allEvents={allEvents} loading={loadingAllEvents} show={showAllEvents} onClose={() => setShowAllEvents(false)} />
     </div>
   );
 }

@@ -173,7 +173,8 @@ const getItems = () => {
         pricePerUnit: ""
       },
       attributes:[],
-      trackingLink: ""
+      trackingLink: "",
+      trackingNumber: "",
     };
     try {
       itemToPush.itemId = item.children.itemId.innerText;
@@ -241,6 +242,11 @@ const getItems = () => {
     } catch (error) {
       console.log('Tracking Link Not Found!');
     }
+    try {
+      itemToPush.trackingNumber = item.children.trackingNumber.innerText
+    } catch (error) {
+      console.log('Tracking number Not Found!');
+    }
     // try {
     //   size = item.children.size.innerText;
     // } catch (error) {
@@ -280,6 +286,7 @@ const getContactDetails = () => {
 orderData = {
   ...orderData,
   orderId: getData("orderId"),
+  orderName: getData("orderName"),
   ifCancelled: "true" === getData("ifCancelled"),
   ifDelivered: false,
   financialStatus: getData("financialStatus"),

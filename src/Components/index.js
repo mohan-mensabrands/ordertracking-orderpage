@@ -7,3 +7,4 @@ export { default as CancelOrder } from "./CancelOrder";
 export { default as PaymentCard } from "./PaymentCard";
 export { default as OrderSummary } from "./OrderSummary";
 export { default as HelpModal } from "./HelpModal";
+export { default as AllEvents } from "./AllEvents";
