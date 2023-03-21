@@ -48,13 +48,14 @@ export default function OrderInfoCard({
         events={events}
         sku={sku}
         orderData={orderData}
+        onClick={onClick}
       />
       {/* <CancelOrder onClick={onClick}/> */}
     </>
   );
 }
 
-const CreateTimeline = ({ events, sku, orderData }) => {
+const CreateTimeline = ({ events, sku, orderData, onClick }) => {
   // console.log('trackingLink', sku.trackingLink);
   // console.log("all events", events);
   let itemsMap = new Map();
@@ -102,6 +103,7 @@ const CreateTimeline = ({ events, sku, orderData }) => {
       <Timeline
         events={eventsProp}
         orderData={orderData}
+        onClick={onClick}
       />
     );
   }
@@ -109,6 +111,7 @@ const CreateTimeline = ({ events, sku, orderData }) => {
     <Timeline
       events={[{ index: 0, title: 'Created', status: 0, dateTime: orderData.orderDate, trackingLink: sku.trackingLink }]}
       orderData={orderData}
+      onClick={onClick}
     />
   );
 };

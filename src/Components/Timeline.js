@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { RightArrow } from "../svg";
 
-export default function Timeline({ events, orderData }) {
+export default function Timeline({ events, orderData, onClick }) {
   // console.log('evets per sku', events);
   if (orderData.ifCancelled || events.status === 'CANCELLED') {
     return (
@@ -32,7 +32,12 @@ export default function Timeline({ events, orderData }) {
     // document.getElementById(`seeAllUpdates${events.itemId}`).style.display = 'none'
     return (
       <div className="timeline orderTrackingCard">
-        <Event item={events[0]} eventCount={events.length} hideLine={true} />
+        <Event 
+          item={events[0]} 
+          eventCount={events.length} 
+          hideLine={true} 
+          onClick={onClick} 
+        />
       </div>
     )
   }
@@ -40,7 +45,12 @@ export default function Timeline({ events, orderData }) {
   return (
     <div className="timeline orderTrackingCard">
       {events.map((item) => (
-        <Event item={item} eventCount={events.length} trackingLink={events.trackingLink}/>
+        <Event 
+          item={item}
+          eventCount={events.length}
+          trackingLink={events.trackingLink}
+          onClick={onClick}
+        />
       ))}
     </div>
   );
@@ -51,17 +61,17 @@ Timeline.propTypes = {
   orderData: PropTypes.object,
 };
 
-function Event({ item, eventCount, hideLine }) {
+function Event({ item, eventCount, hideLine, onClick }) {
   let eventClass = "timeline-event orderTracking-para-bold " + mapActiveStatus(item.status);
   let dotlineClass = "dot-line " + mapActiveStatus(item.status);
   let style = { display: "none" }
-  const redirectToTrackingLink = () => {
-    if (item.trackingLink && item.trackingLink !== "" && item.status === 0) {
-      window.open(item.trackingLink, '_blank')
-    }
-  }
+  // const redirectToTrackingLink = () => {
+  //   if (item.trackingLink && item.trackingLink !== "" && item.status === 0) {
+  //     window.open(item.trackingLink, '_blank')
+  //   }
+  // }
   return (
-    <div className={eventClass} onClick={redirectToTrackingLink}>
+    <div className={eventClass} onClick={()=> onClick()}>
       <div className={dotlineClass}>
         <div className="dot"> </div>
         {!hideLine ? <div className="line" style={eventCount === 1 ? style : {}}> </div> : <></>}

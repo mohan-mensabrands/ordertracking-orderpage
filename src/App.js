@@ -97,14 +97,14 @@ function App({ orderData }) {
               events={events}
               sku={sku}
               orderData={orderData}
-              onClick={() => setShowHelp(!showHelp)}
+              onClick={() => setShowAllEvents(!showAllEvents)}
             />
-            <div 
+            {/* <div 
               className="mensaViewMore" 
               id={'seeAllUpdates'+sku.itemId}
               onClick={() => toggleAllEvents(sku.trackingNumber)} 
               style={!sku.trackingNumber ? {display:'none'} : {}}
-            >{showAllEvents ? 'Close' : 'See All Updates'}</div>
+            >{showAllEvents ? 'Close' : 'See All Updates'}</div> */}
             <hr className="saparator" />
           </>
         );
